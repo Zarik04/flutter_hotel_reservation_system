@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hotel_reservation_system/RegistractionPage.dart';
+import 'package:flutter_hotel_reservation_system/RegistrationPage.dart';
 
 class IntroPage extends StatefulWidget {
   const IntroPage({super.key});
