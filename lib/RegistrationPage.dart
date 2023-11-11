@@ -34,7 +34,7 @@ class _RegisterPageState extends State<RegisterPage> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding: const EdgeInsets.all(25.0),
                   child: Text(
                     'Registration',
                     style: TextStyle(
