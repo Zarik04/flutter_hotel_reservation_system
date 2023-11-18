@@ -130,6 +130,24 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
+                const SizedBox(
+                  height: 35,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                  ),
+                  onPressed: () {},
+                  child: const Padding(
+                    padding: EdgeInsets.only(
+                        left: 35, right: 35, bottom: 15, top: 15),
+                    child: Text(
+                      'Register',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
