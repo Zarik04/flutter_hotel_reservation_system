@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hotel_reservation_system/LoginPage.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -30,11 +31,11 @@ class _RegisterPageState extends State<RegisterPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 70.0),
+            padding: const EdgeInsets.symmetric(vertical: 60.0),
             child: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(25.0),
+                const Padding(
+                  padding: EdgeInsets.all(25.0),
                   child: Text(
                     'Registration',
                     style: TextStyle(
@@ -44,7 +45,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(12),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
                   child: TextField(
                     decoration: InputDecoration(
                       hintText: 'First Name',
@@ -59,7 +61,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(12),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
                   child: TextField(
                     decoration: InputDecoration(
                       hintText: 'Last Name',
@@ -74,7 +77,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(12),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
                   child: TextField(
                     decoration: InputDecoration(
                       hintText: 'Contact Number',
@@ -89,7 +93,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
                   child: TextField(
                     decoration: InputDecoration(
                       hintText: 'Email Address',
@@ -104,7 +109,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(12.0),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
                   child: InkWell(
                     onTap: () => _selectDate(context),
                     child: InputDecorator(
@@ -130,8 +136,81 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 35,
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                  child: TextField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                      hintText: 'Password',
+                      prefixIcon: const Icon(
+                        Icons.lock,
+                        color: Colors.green,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Already have an account ?',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                      const SizedBox(width: 5.0),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginPage()),
+                          );
+                        },
+                        style: ButtonStyle(
+                          overlayColor: MaterialStateProperty.all(
+                              Colors.transparent), // To remove after effects
+                        ),
+                        child: const Text(
+                          'Sign In',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      side: const BorderSide(color: Colors.green, width: 2),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 13.0, horizontal: 30.0),
+                      child: Text(
+                        'Sign Up',
+                        style: TextStyle(
+                            color: Colors.green,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
