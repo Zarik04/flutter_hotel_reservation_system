@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hotel_reservation_system/LoginPage.dart';
 import 'package:flutter_hotel_reservation_system/RegistrationPage.dart';
 
 class IntroPage extends StatefulWidget {
@@ -16,7 +15,6 @@ class _HomeScState extends State<IntroPage> {
       backgroundColor: const Color.fromARGB(255, 246, 251, 255),
       body: Stack(
         children: [
-          
           const Positioned(
             top: 105,
             left: 0,
@@ -66,7 +64,7 @@ class _HomeScState extends State<IntroPage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) =>  const LoginPage()),
+                    MaterialPageRoute(builder: (context) => const RegisterPage()),
                   );
                 },
                 child: const Padding(

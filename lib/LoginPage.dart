@@ -105,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => DashboardPage()),
+                              builder: (context) => const DashboardPage()),
                         );
                       },
                       style: ElevatedButton.styleFrom(
