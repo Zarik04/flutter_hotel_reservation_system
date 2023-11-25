@@ -15,11 +15,39 @@ class _DrawerMenuState extends State<DrawerMenu> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.green,
+          const SizedBox(
+            height: 250,
+            child: UserAccountsDrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.green,
+              ),
+              accountName: Text(
+                'Alan Walker',
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
+              ),
+              accountEmail: Text(
+                'sample@example.com',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+                ),
+              ),
+              currentAccountPicture: CircleAvatar(
+                child: ClipOval(
+                  child: Image(
+                    image: AssetImage('img/ava.jpg'),
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              currentAccountPictureSize: Size(100.0, 100.0),
             ),
-            child: Column(),
           ),
           ListTile(
             title: const Text(
