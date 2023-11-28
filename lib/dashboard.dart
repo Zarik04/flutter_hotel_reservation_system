@@ -76,16 +76,16 @@ class HotelCardList extends StatelessWidget {
         location: 'City F',
       ),
       Hotel(
-        name: 'Hotel G',
+        name: 'The Ritz-Carlton',
         imageUrl: 'img/hotel7.jpg',
         rating: 4.6,
         location: 'City G',
       ),
       Hotel(
-        name: 'Hotel H',
+        name: 'The Fullerton Hotel',
         imageUrl: 'img/hotel1.jpg',
         rating: 3.9,
-        location: 'City H',
+        location: 'Singapore',
       ),
     ];
 
