@@ -19,7 +19,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
             height: 250,
             child: UserAccountsDrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.green,
+                color: Colors.deepPurple,
               ),
               accountName: Text(
                 'Alan Walker',

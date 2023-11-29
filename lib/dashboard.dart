@@ -24,10 +24,10 @@ class DashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.deepPurple,
         title: const Text('Dashboard'),
       ),
-      body: HotelCardList(),
+      body: const HotelCardList(),
       drawer: const DrawerMenu(),
     );
   }
@@ -152,9 +152,10 @@ class HotelCard extends StatelessWidget {
               children: [
                 Text(
                   hotel.name,
-                  style: const TextStyle(
+                  style: TextStyle(
+                    color: Colors.deepPurple.shade700,
                     fontSize: 20,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
                 const SizedBox(height: 8),
@@ -163,16 +164,16 @@ class HotelCard extends StatelessWidget {
                   children: [
                     Text(
                       'Rating: ${hotel.rating}',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
-                        color: Colors.grey,
+                        color: Colors.indigo.shade200,
                       ),
                     ),
                     Text(
                       'Location: ${hotel.location}',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
-                        color: Colors.grey,
+                        color: Colors.indigo.shade200,
                       ),
                     ),
                   ],
