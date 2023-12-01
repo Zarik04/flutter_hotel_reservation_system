@@ -46,10 +46,10 @@ class HotelCardList extends StatelessWidget {
         location: ' New York City',
       ),
       Hotel(
-        name: 'Hilton Worldwide',
+        name: 'Grand Lisboa',
         imageUrl: 'img/hotel2.jpg',
         rating: 4.2,
-        location: ' New York City',
+        location: ' Macau',
       ),
       Hotel(
         name: 'Hilton Worldwide',
@@ -58,34 +58,34 @@ class HotelCardList extends StatelessWidget {
         location: ' New York City',
       ),
       Hotel(
-        name: 'Hotel D',
+        name: 'Grand Hyatt',
         imageUrl: 'img/hotel4.jpg',
         rating: 3.8,
-        location: 'City D',
+        location: ' Dubai',
       ),
       Hotel(
-        name: 'Hotel E',
+        name: 'InterContinental',
         imageUrl: 'img/hotel5.jpg',
         rating: 4.7,
-        location: 'City E',
+        location: 'Lusaka',
       ),
       Hotel(
-        name: 'Hotel F',
+        name: 'Premier Best Western',
         imageUrl: 'img/hotel6.jpg',
         rating: 4.2,
-        location: 'City F',
+        location: ' Florida',
       ),
       Hotel(
         name: 'The Ritz-Carlton',
         imageUrl: 'img/hotel7.jpg',
         rating: 4.6,
-        location: 'City G',
+        location: ' Vienna',
       ),
       Hotel(
         name: 'The Fullerton Hotel',
         imageUrl: 'img/hotel1.jpg',
         rating: 3.9,
-        location: 'Singapore',
+        location: ' Singapore',
       ),
     ];
 
