@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hotel_reservation_system/screens/login_page.dart';
+import 'package:flutter_hotel_reservation_system/screens/reservation_screen.dart';
 import 'package:flutter_hotel_reservation_system/widget_items/drawer_menu_items.dart';
 import '../screens/dashboard.dart';
 
@@ -16,8 +17,8 @@ class _DrawerMenuState extends State<DrawerMenu> {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
-        children: const [
-          SizedBox(
+        children: [
+          const SizedBox(
             height: 250,
             child: UserAccountsDrawerHeader(
               decoration: BoxDecoration(
@@ -51,38 +52,31 @@ class _DrawerMenuState extends State<DrawerMenu> {
               currentAccountPictureSize: Size(100.0, 100.0),
             ),
           ),
-          SizedBox(height: 18.0),
-
-          DrawerItem(
+          const SizedBox(height: 18.0),
+          const DrawerItem(
               itemName: 'Dashboard',
               iconName: Icons.home_rounded,
-              routeToPage: DashboardPage()
+              routeToPage: DashboardPage()),
+          const DrawerItem(
+            itemName: 'Profile',
+            iconName: Icons.person_rounded,
+            routeToPage: DashboardPage(),
           ),
-
-          DrawerItem(
-              itemName: 'Profile',
-              iconName: Icons.person_rounded,
-              routeToPage: DashboardPage(),
-          ),
-
           DrawerItem(
             itemName: 'Reservations',
             iconName: Icons.list_alt_rounded,
-            routeToPage: DashboardPage(),
+            routeToPage: ReservationPage(),
           ),
-
           DrawerItem(
             itemName: 'Help',
             iconName: Icons.help_rounded,
             routeToPage: DashboardPage(),
           ),
-
           DrawerItem(
             itemName: 'Log Out',
             iconName: Icons.exit_to_app_rounded,
             routeToPage: LoginPage(),
           ),
-
         ],
       ),
     );
