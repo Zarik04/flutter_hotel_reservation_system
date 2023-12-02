@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hotel_reservation_system/intro_page.dart';
+import 'package:flutter_hotel_reservation_system/screens/intro_page.dart';
 
 void main(){
   runApp(const HomeApp());

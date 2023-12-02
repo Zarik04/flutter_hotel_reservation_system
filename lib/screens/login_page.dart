@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hotel_reservation_system/RegistrationPage.dart';
-import 'package:flutter_hotel_reservation_system/dashboard.dart';
+import 'package:flutter_hotel_reservation_system/screens/registration_page.dart';
+import 'package:flutter_hotel_reservation_system/screens/dashboard.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
