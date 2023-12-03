@@ -65,7 +65,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
           DrawerItem(
             itemName: 'Reservations',
             iconName: Icons.list_alt_rounded,
-            routeToPage: ReservationPage(),
+            routeToPage: ReservationScreen(),
           ),
           DrawerItem(
             itemName: 'Help',

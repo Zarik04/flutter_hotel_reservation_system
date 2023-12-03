@@ -1,26 +1,16 @@
 import 'package:flutter/material.dart';
+import '../widget_items/drawer_menu.dart';
 
-class ReservationPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Hoteleum"),
-        ),
-        body: ReservationScreen(),
-      ),
-    );
-  }
-}
 
 class ReservationScreen extends StatefulWidget {
+  const ReservationScreen({super.key});
+
   @override
   _ReservationScreenState createState() => _ReservationScreenState();
 }
 
 class _ReservationScreenState extends State<ReservationScreen> {
-  List<Item> _data = generateItems();
+  final List<Item> _data = generateItems();
 
   // Track the selected reservation
   Item? selectedReservation;
@@ -36,81 +26,86 @@ class _ReservationScreenState extends State<ReservationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                // Find the active reservation
-                Item activeReservation = _data.firstWhere(
-                  (item) => item.headerValue == 'Active Reservation',
-                );
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurple,
+        title: const Text('Reservations'),
+      ),
+      drawer: const DrawerMenu(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  // Find the active reservation
+                  Item activeReservation = _data.firstWhere(
+                        (item) => item.headerValue == 'Active Reservation',
+                  );
 
-                // Set the selected reservation
-                setState(() {
-                  selectedReservation = activeReservation;
-                });
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Colors.blue,
-                onPrimary: Colors.white,
+                  // Set the selected reservation
+                  setState(() {
+                    selectedReservation = activeReservation;
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white, backgroundColor: Colors.blue,
+                ),
+                child: const Text('Show Active Reservation'),
               ),
-              child: Text('Show Active Reservation'),
-            ),
 
-            SizedBox(height: 16),
+              const SizedBox(height: 16),
 
-            ElevatedButton(
-              onPressed: () {
-                // Find the non-active reservation
-                Item nonActiveReservation = _data.firstWhere(
-                  (item) => item.headerValue == 'Passive Reservation',
-                );
+              ElevatedButton(
+                onPressed: () {
+                  // Find the non-active reservation
+                  Item nonActiveReservation = _data.firstWhere(
+                        (item) => item.headerValue == 'Passive Reservation',
+                  );
 
-                // Set the selected reservation
-                setState(() {
-                  selectedReservation = nonActiveReservation;
-                });
-              },
-              style: ElevatedButton.styleFrom(
-                primary: Colors.orange,
-                onPrimary: Colors.white,
+                  // Set the selected reservation
+                  setState(() {
+                    selectedReservation = nonActiveReservation;
+                  });
+                },
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white, backgroundColor: Colors.orange,
+                ),
+                child: const Text('Show Non-Active Reservation'),
               ),
-              child: Text('Show Non-Active Reservation'),
-            ),
 
-            SizedBox(height: 16),
+              const SizedBox(height: 16),
 
-            // Show details of the selected reservation using a Card
-            if (selectedReservation != null)
-              Card(
-                margin: EdgeInsets.all(8.0),
-                elevation: 4,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    ListTile(
-                      title: Text(
-                        selectedReservation!.headerValue,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
+              // Show details of the selected reservation using a Card
+              if (selectedReservation != null)
+                Card(
+                  margin: const EdgeInsets.all(8.0),
+                  elevation: 4,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      ListTile(
+                        title: Text(
+                          selectedReservation!.headerValue,
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                        subtitle: Text(
+                          selectedReservation!.expandedValue,
+                          style: const TextStyle(fontSize: 16),
                         ),
                       ),
-                      subtitle: Text(
-                        selectedReservation!.expandedValue,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ),
-                    for (String hotel in selectedReservation!.hotels!)
-                      HotelTile(name: hotel),
-                  ],
+                      for (String hotel in selectedReservation!.hotels!)
+                        HotelTile(name: hotel),
+                    ],
+                  ),
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -120,16 +115,16 @@ class _ReservationScreenState extends State<ReservationScreen> {
 class HotelTile extends StatelessWidget {
   final String name;
 
-  HotelTile({required this.name});
+  const HotelTile({super.key, required this.name});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      contentPadding: EdgeInsets.all(16),
+      contentPadding: const EdgeInsets.all(16),
       leading: Container(
         width: 60,
         height: 60,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           shape: BoxShape.circle,
           image: DecorationImage(
             image:
@@ -140,20 +135,19 @@ class HotelTile extends StatelessWidget {
       ),
       title: Text(
         name,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 16,
         ),
       ),
-      subtitle: Column(
-        crossAxisAlignment: CrossAxisAlignment.start
-,
+      subtitle: const Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('City: Your City'),
           Text('Room Type: Standard'),
         ],
       ),
-      trailing: Icon(Icons.arrow_forward),
+      trailing: const Icon(Icons.arrow_forward),
     );
   }
 }
