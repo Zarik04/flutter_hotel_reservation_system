@@ -12,10 +12,10 @@ class _HomeScState extends State<IntroPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 246, 251, 255),
+      backgroundColor: Colors.white,
       body: Stack(
         children: [
-          const Positioned(
+          Positioned(
             top: 105,
             left: 0,
             right: 0,
@@ -23,21 +23,22 @@ class _HomeScState extends State<IntroPage> {
               alignment: Alignment.topCenter,
               child: Column(
                 children: [
-                  Text(
+                  const Text(
                     'Hoteleum',
                     style: TextStyle(
-                      color: Colors.green,
+                      color: Colors.deepPurple,
                       fontWeight: FontWeight.bold,
                       fontSize: 40,
                     ),
                   ),
-                  SizedBox(
-                    height: 15,
+                  const SizedBox(
+                    height: 10,
                   ),
                   Text(
-                    '"Welcome to Hotel Reservation System"',
+                    '"Rest In Piece"',
                     style: TextStyle(
-                      color: Color.fromARGB(255, 45, 68, 46),
+                      fontSize: 16,
+                      color: Colors.indigo.shade500,
                     ),
                   ),
                 ],
@@ -59,7 +60,7 @@ class _HomeScState extends State<IntroPage> {
               alignment: Alignment.center,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green,
+                  backgroundColor: Colors.deepPurple,
                 ),
                 onPressed: () {
                   Navigator.push(

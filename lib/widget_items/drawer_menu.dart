@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hotel_reservation_system/models/guest.dart';
 import 'package:flutter_hotel_reservation_system/screens/login_page.dart';
-import 'package:flutter_hotel_reservation_system/screens/reservation_screen.dart';
+import 'package:flutter_hotel_reservation_system/screens/reservations_page.dart';
 import 'package:flutter_hotel_reservation_system/widget_items/drawer_menu_items.dart';
 import '../screens/dashboard.dart';
+import '../screens/profile_page.dart';
 
 class DrawerMenu extends StatefulWidget {
   const DrawerMenu({super.key});
@@ -57,22 +59,28 @@ class _DrawerMenuState extends State<DrawerMenu> {
               itemName: 'Dashboard',
               iconName: Icons.home_rounded,
               routeToPage: DashboardPage()),
-          const DrawerItem(
+          DrawerItem(
             itemName: 'Profile',
             iconName: Icons.person_rounded,
-            routeToPage: DashboardPage(),
+            routeToPage: ProfilePage(
+              user: User(
+                name: 'John Doe',
+                email: 'john.doe@example.com',
+                imageUrl: 'https://example.com/profile-image.jpg',
+              ),
+            ),
           ),
-          DrawerItem(
+          const DrawerItem(
             itemName: 'Reservations',
             iconName: Icons.list_alt_rounded,
             routeToPage: ReservationScreen(),
           ),
-          DrawerItem(
+          const DrawerItem(
             itemName: 'Help',
             iconName: Icons.help_rounded,
             routeToPage: DashboardPage(),
           ),
-          DrawerItem(
+          const DrawerItem(
             itemName: 'Log Out',
             iconName: Icons.exit_to_app_rounded,
             routeToPage: LoginPage(),
