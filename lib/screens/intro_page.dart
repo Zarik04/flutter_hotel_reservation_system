@@ -12,7 +12,7 @@ class _HomeScState extends State<IntroPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromRGBO(237, 233, 255, 1),
       body: Stack(
         children: [
           Positioned(
@@ -48,7 +48,7 @@ class _HomeScState extends State<IntroPage> {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('img/intro.png'),
+                image: AssetImage('img/introMain.png'),
               ),
             ),
           ),
