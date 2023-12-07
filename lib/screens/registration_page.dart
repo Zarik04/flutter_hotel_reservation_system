@@ -11,7 +11,6 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   DateTime? _selectedDate;
   static const Color mainThemeColor = Colors.deepPurple;
-  static Color textThemeColor = Colors.indigo.shade300;
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(

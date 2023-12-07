@@ -10,6 +10,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  static const Color mainThemeColor = Colors.deepPurple;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Text(
                       'Login Page',
                       style: TextStyle(
-                          color: Colors.green,
+                          color: mainThemeColor,
                           fontSize: 30,
                           fontWeight: FontWeight.bold),
                     ),
@@ -38,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
                         hintText: 'Email Address',
                         prefixIcon: const Icon(
                           Icons.mail,
-                          color: Colors.green,
+                          color: mainThemeColor,
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -55,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                         hintText: 'Password',
                         prefixIcon: const Icon(
                           Icons.lock,
-                          color: Colors.green,
+                          color: mainThemeColor,
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -90,6 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: const Text(
                             'Sign Up',
                             style: TextStyle(
+                              color: Colors.indigo,
                               fontSize: 16,
                             ),
                           ),
@@ -110,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        side: const BorderSide(color: Colors.green, width: 2),
+                        side: const BorderSide(color: mainThemeColor, width: 2),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -121,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text(
                           'Login',
                           style: TextStyle(
-                              color: Colors.green,
+                              color: mainThemeColor,
                               fontSize: 20,
                               fontWeight: FontWeight.bold),
                         ),
