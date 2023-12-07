@@ -10,6 +10,8 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   DateTime? _selectedDate;
+  static const Color mainThemeColor = Colors.deepPurple;
+  static Color textThemeColor = Colors.indigo.shade300;
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -39,7 +41,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Text(
                     'Registration',
                     style: TextStyle(
-                        color: Colors.green,
+                        color: mainThemeColor,
                         fontSize: 26,
                         fontWeight: FontWeight.bold),
                   ),
@@ -52,7 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       hintText: 'First Name',
                       prefixIcon: const Icon(
                         Icons.person_2_rounded,
-                        color: Colors.green,
+                        color: mainThemeColor,
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -68,7 +70,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       hintText: 'Last Name',
                       prefixIcon: const Icon(
                         Icons.person_2_rounded,
-                        color: Colors.green,
+                        color: mainThemeColor,
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -84,7 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       hintText: 'Contact Number',
                       prefixIcon: const Icon(
                         Icons.phone,
-                        color: Colors.green,
+                        color: mainThemeColor,
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -100,7 +102,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       hintText: 'Email Address',
                       prefixIcon: const Icon(
                         Icons.mail,
-                        color: Colors.green,
+                        color: mainThemeColor,
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -118,7 +120,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         hintText: 'Date of Birth',
                         prefixIcon: const Icon(
                           Icons.calendar_today,
-                          color: Colors.green,
+                          color: mainThemeColor,
                         ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
@@ -145,7 +147,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       hintText: 'Password',
                       prefixIcon: const Icon(
                         Icons.lock,
-                        color: Colors.green,
+                        color: mainThemeColor,
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -180,6 +182,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         child: const Text(
                           'Sign In',
                           style: TextStyle(
+                            color: Colors.indigo,
                             fontSize: 16,
                           ),
                         ),
@@ -200,7 +203,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
-                      side: const BorderSide(color: Colors.green, width: 2),
+                      side: const BorderSide(color: mainThemeColor, width: 2),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -211,7 +214,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: Text(
                         'Sign Up',
                         style: TextStyle(
-                            color: Colors.green,
+                            color: mainThemeColor,
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),

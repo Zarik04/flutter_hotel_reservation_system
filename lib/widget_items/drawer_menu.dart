@@ -63,10 +63,13 @@ class _DrawerMenuState extends State<DrawerMenu> {
             itemName: 'Profile',
             iconName: Icons.person_rounded,
             routeToPage: ProfilePage(
-              user: User(
-                name: 'John Doe',
-                email: 'john.doe@example.com',
-                imageUrl: 'https://example.com/profile-image.jpg',
+              guest: Guest(
+                firstName: 'Alan',
+                lastName: 'Walker',
+                imagePath: 'img/ava.jpg',
+                email: 'sample@example.com',
+                phone: '+12345678554',
+                password: 'strong_password'
               ),
             ),
           ),

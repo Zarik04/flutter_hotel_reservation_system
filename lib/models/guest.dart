@@ -1,29 +1,22 @@
-// class Guest {
-//   final String firstName,
-//                lastName,
-//                email,
-//                phone,
-//                password;
-//   Guest({
-//     required this.firstName,
-//     required this.lastName,
-//     required this.email,
-//     required this.phone,
-//     required this.password
-//   });
-//
-// }
+
+class Guest {
+  final String firstName,
+               lastName,
+               imagePath,
+               email,
+               phone,
+               password;
 
 
-
-class User {
-  final String name;
-  final String email;
-  final String imageUrl;
-
-  User({
-    required this.name,
+  Guest({
+    required this.firstName,
+    required this.lastName,
+    required this.imagePath,
     required this.email,
-    required this.imageUrl,
+    required this.phone,
+    required this.password
   });
+
 }
+
+
