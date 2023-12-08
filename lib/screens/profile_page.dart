@@ -4,13 +4,20 @@ import 'package:flutter_hotel_reservation_system/screens/reservations_page.dart'
 import '../models/guest.dart';
 import '../widget_items/drawer_menu.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   final Guest guest;
   static const Color labelThemeColor = Colors.deepPurple;
   static Color valueThemeColor = Colors.indigo.shade400;
 
   const ProfilePage({super.key, required this.guest});
 
+  static bool isPasswordHidden = true;
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +35,7 @@ class ProfilePage extends StatelessWidget {
               Center(
                 child: CircleAvatar(
                   radius: 100,
-                  backgroundImage: AssetImage(guest.imagePath),
+                  backgroundImage: AssetImage(widget.guest.imagePath),
                 ),
               ),
               const SizedBox(height: 35),
@@ -37,17 +44,19 @@ class ProfilePage extends StatelessWidget {
                   const Text(
                     'First Name:',
                     style: TextStyle(
-                      color: labelThemeColor,
+                      color: ProfilePage.labelThemeColor,
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  const SizedBox(width: 10,),
+                  const SizedBox(
+                    width: 10,
+                  ),
                   Text(
-                    guest.firstName,
+                    widget.guest.firstName,
                     style: TextStyle(
                       fontSize: 25,
-                      color: valueThemeColor,
+                      color: ProfilePage.valueThemeColor,
                       fontWeight: FontWeight.w400,
                     ),
                   )
@@ -59,102 +68,123 @@ class ProfilePage extends StatelessWidget {
                   const Text(
                     'Last Name:',
                     style: TextStyle(
-                      color: labelThemeColor,
+                      color: ProfilePage.labelThemeColor,
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  const SizedBox(width: 10,),
+                  const SizedBox(
+                    width: 10,
+                  ),
                   Text(
-                    guest.lastName,
+                    widget.guest.lastName,
                     style: TextStyle(
                       fontSize: 25,
-                      color: valueThemeColor,
+                      color: ProfilePage.valueThemeColor,
                       fontWeight: FontWeight.w400,
                     ),
                   )
                 ],
               ),
-              const SizedBox(height: 15,),
+              const SizedBox(
+                height: 15,
+              ),
               Row(
                 children: [
                   const Text(
                     'Email:',
                     style: TextStyle(
-                      color: labelThemeColor,
+                      color: ProfilePage.labelThemeColor,
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  const SizedBox(width: 10,),
+                  const SizedBox(
+                    width: 10,
+                  ),
                   Text(
-                    guest.email,
+                    widget.guest.email,
                     style: TextStyle(
                       fontSize: 20,
-                      color: valueThemeColor,
+                      color: ProfilePage.valueThemeColor,
                       fontWeight: FontWeight.w400,
                     ),
                   )
                 ],
               ),
-              const SizedBox(height: 15,),
+              const SizedBox(
+                height: 15,
+              ),
               Row(
                 children: [
                   const Text(
                     'Phone:',
                     style: TextStyle(
-                      color: labelThemeColor,
+                      color: ProfilePage.labelThemeColor,
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  const SizedBox(width: 10,),
+                  const SizedBox(
+                    width: 10,
+                  ),
                   Text(
-                    guest.phone,
+                    widget.guest.phone,
                     style: TextStyle(
                       fontSize: 20,
-                      color: valueThemeColor,
+                      color: ProfilePage.valueThemeColor,
                       fontWeight: FontWeight.w400,
                     ),
                   )
                 ],
               ),
-              const SizedBox(height: 8,),
+              const SizedBox(
+                height: 8,
+              ),
               Row(
                 children: [
                   const Text(
                     'Password:',
                     style: TextStyle(
-                      color: labelThemeColor,
+                      color: ProfilePage.labelThemeColor,
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  const SizedBox(width: 10,),
+                  const SizedBox(
+                    width: 10,
+                  ),
                   Text(
-                    '*'*guest.password.length,
+                    ProfilePage.isPasswordHidden
+                        ? '*' * widget.guest.password.length
+                        : widget.guest.password,
                     style: TextStyle(
                       fontSize: 20,
-                      color: valueThemeColor,
+                      color: ProfilePage.valueThemeColor,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  const SizedBox(width: 15,),
+                  const SizedBox(
+                    width: 15,
+                  ),
                   IconButton.filled(
-                    onPressed: (){
-
+                    splashColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onPressed: () {
+                      setState(() {
+                        ProfilePage.isPasswordHidden = !ProfilePage.isPasswordHidden;
+                      });
                     },
                     icon: Icon(
-                      Icons.visibility,
+                      ProfilePage.isPasswordHidden? Icons.visibility:Icons.visibility_off,
                     ),
-
                   )
                 ],
               ),
               const SizedBox(height: 24),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: labelThemeColor,
+                  backgroundColor: ProfilePage.labelThemeColor,
                   padding: const EdgeInsets.all(15.0),
                 ),
                 onPressed: () {
