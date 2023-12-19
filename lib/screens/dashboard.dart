@@ -62,6 +62,7 @@ class DashboardPage extends StatelessWidget {
       imageUrl: 'img/hotel7.jpg',
       rating: 4.6,
       location: ' Vienna',
+      
     ),
     Hotel(
       name: 'The Fullerton Hotel',
