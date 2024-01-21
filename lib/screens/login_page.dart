@@ -130,13 +130,21 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 25),
                       child: ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const DashboardPage()),
-                            );
+                            dynamic result = await _auth
+                                .signInWithEmailAndPassword(email, password);
+                            if (result == null) {
+                              setState(() => message =
+                                  'Please, supply valid credentials !');
+                            } else {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const DashboardPage()),
+                              );
+                            }
                           }
                         },
                         style: ElevatedButton.styleFrom(
