@@ -29,7 +29,6 @@ class _RegisterPageState extends State<RegisterPage> {
     password: '',
   );
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -142,7 +141,6 @@ class _RegisterPageState extends State<RegisterPage> {
                   },
                   obscureText: false,
                 ),
-
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: 5.0, horizontal: 25.0),
@@ -263,9 +261,8 @@ class _RegisterPageState extends State<RegisterPage> {
                     onPressed: _selectedDate != null
                         ? () async {
                             if (_formKey.currentState!.validate()) {
-                              dynamic result =
-                                  await _auth.registerWithEmailAndPassword(
-                                      guest.email!, guest.password!);
+                              dynamic result = await _auth
+                                  .registerWithEmailAndPassword(guest);
                               if (result == null) {
                                 setState(() {
                                   message = "Something went wrong";

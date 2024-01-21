@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_hotel_reservation_system/models/guest.dart';
+import 'package:flutter_hotel_reservation_system/services/database.dart';
+
 // import 'package:lab_11_main/models/user.dart';
 // import 'package:lab_11_main/services/database.dart';
 
@@ -10,14 +12,19 @@ class AuthService {
     return user != null ? Guest(uid: user.uid, email: user.email) : null;
   }
 
-  Future registerWithEmailAndPassword(
-      String email, String password) async {
+  Future registerWithEmailAndPassword(Guest guest) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+          email: guest.email!, password: guest.password!);
       User? user = result.user;
-      // await DatabaseService(uid: user!.uid)
-      //     .updateUserData(fullName, email, password);
+      await DatabaseService(uid: user!.uid).updateGuestData(
+        guest.firstName!,
+        guest.lastName!,
+        guest.phone!,
+        guest.passportNumber!,
+        guest.email!,
+        guest.birthDate!,
+      );
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e);
