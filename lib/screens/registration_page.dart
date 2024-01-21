@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hotel_reservation_system/screens/login_page.dart';
+import 'package:flutter_hotel_reservation_system/widget_items/custom_text_field.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -10,7 +11,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   DateTime? _selectedDate;
-  static const Color mainThemeColor = Colors.deepPurple;
+  static const MaterialColor mainThemeColor = Colors.deepPurple;
   final _formKey = GlobalKey<FormState>();
   String message = '';
   MaterialColor messageColor = Colors.red;
@@ -48,89 +49,81 @@ class _RegisterPageState extends State<RegisterPage> {
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'First Name',
-                      prefixIcon: const Icon(
-                        Icons.person_2_rounded,
-                        color: mainThemeColor,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ),
+                CustomTextField(
+                  hintText: 'First Name',
+                  icon: Icons.person_2_rounded,
+                  color: mainThemeColor,
+                  validatorFunc: (val) {
+                    val = val!.trim();
+                    if (val == null || val.isEmpty) {
+                      return 'Please enter the first name';
+                    } else {
+                      return null;
+                    }
+                  },
+                  obscureText: false,
+                ),
+                CustomTextField(
+                  hintText: 'Last Name',
+                  icon: Icons.person_2_rounded,
+                  color: mainThemeColor,
+                  validatorFunc: (val) {
+                    val = val!.trim();
+                    if (val == null || val.isEmpty) {
+                      return 'Please enter the last name';
+                    } else {
+                      return null;
+                    }
+                  },
+                  obscureText: false,
+                ),
+                CustomTextField(
+                  hintText: 'Contact Number',
+                  icon: Icons.phone,
+                  color: mainThemeColor,
+                  validatorFunc: (val) {
+                    Pattern pattern = r'^\d{1,15}$';
+                    RegExp regex = RegExp(pattern as String);
+                    if (!regex.hasMatch(val!)) {
+                      val = val.trim();
+                      return 'Enter valid phone number';
+                    } else {
+                      return null;
+                    }
+                  },
+                  obscureText: false,
+                ),
+                CustomTextField(
+                  hintText: 'Passport No',
+                  icon: Icons.document_scanner_rounded,
+                  color: mainThemeColor,
+                  validatorFunc: (String? val) {
+                    val = val!.trim();
+                    if (val.isEmpty || val == null) {
+                      return 'Please enter the passport no';
+                    }
+                    return null;
+                  },
+                  obscureText: false,
+                ),
+                CustomTextField(
+                  hintText: 'Email Address',
+                  icon: Icons.mail,
+                  color: mainThemeColor,
+                  validatorFunc: (String? val) {
+                    Pattern pattern = r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
+                    RegExp regex = RegExp(pattern as String);
+                    if (!regex.hasMatch(val!)) {
+                      return 'Enter valid email';
+                    } else {
+                      return null;
+                    }
+                  },
+                  obscureText: false,
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Last Name',
-                      prefixIcon: const Icon(
-                        Icons.person_2_rounded,
-                        color: mainThemeColor,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Contact Number',
-                      prefixIcon: const Icon(
-                        Icons.phone,
-                        color: mainThemeColor,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Passport No',
-                      prefixIcon: const Icon(
-                        Icons.document_scanner_rounded,
-                        color: mainThemeColor,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Email Address',
-                      prefixIcon: const Icon(
-                        Icons.mail,
-                        color: mainThemeColor,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 5.0, horizontal: 25.0),
                   child: InkWell(
                     onTap: () => _selectDate(context),
                     child: InputDecorator(
@@ -150,31 +143,29 @@ class _RegisterPageState extends State<RegisterPage> {
                               style: const TextStyle(fontSize: 16),
                             )
                           : const Text(
-                              'Select Date',
+                              'Select Birth Date',
                               style: TextStyle(fontSize: 16),
                             ),
                     ),
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                  child: TextFormField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                      prefixIcon: const Icon(
-                        Icons.lock,
-                        color: mainThemeColor,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                  ),
+                CustomTextField(
+                  hintText: 'Password',
+                  icon: Icons.lock,
+                  color: mainThemeColor,
+                  validatorFunc: (String? val) {
+                    val = val!.trim();
+                    if (val == null || val.isEmpty) {
+                      return 'Please enter your password';
+                    } else if (val.length < 8) {
+                      return 'Password must be at least 8 characters long';
+                    }
+                    return null;
+                  },
+                  obscureText: true,
                 ),
                 Text(
-                  message,
+                  'red',
                   style: TextStyle(
                     color: messageColor,
                     fontWeight: FontWeight.w600,
@@ -221,11 +212,14 @@ class _RegisterPageState extends State<RegisterPage> {
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginPage()),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => const LoginPage()),
+                      // );
+                      if (_formKey.currentState!.validate()) {
+                        print("correct");
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
