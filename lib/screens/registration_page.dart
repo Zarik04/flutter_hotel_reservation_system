@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hotel_reservation_system/models/guest.dart';
 import 'package:flutter_hotel_reservation_system/screens/login_page.dart';
 import 'package:flutter_hotel_reservation_system/widget_items/custom_text_field.dart';
+import 'package:flutter_hotel_reservation_system/services/auth.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -14,6 +15,7 @@ class _RegisterPageState extends State<RegisterPage> {
   DateTime? _selectedDate;
   static const MaterialColor mainThemeColor = Colors.deepPurple;
   final _formKey = GlobalKey<FormState>();
+  final AuthService _auth = AuthService();
   String message = '';
   MaterialColor messageColor = Colors.red;
 
@@ -182,7 +184,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 //   ),
                 // ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 25.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 5.0, horizontal: 25.0),
                   child: InkWell(
                     onTap: () async {
                       final DateTime? picked = await showDatePicker(
@@ -192,15 +195,19 @@ class _RegisterPageState extends State<RegisterPage> {
                         lastDate: DateTime.now(),
                       );
                       if (picked != null) {
-                        if (DateTime.now().difference(picked).inDays / 365 < 18) {
+                        if (DateTime.now().difference(picked).inDays / 365 <
+                            18) {
                           // The user is not 18 years old yet
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('You must be at least 18 years old.')),
+                            SnackBar(
+                                content:
+                                    Text('You must be at least 18 years old.')),
                           );
                         } else {
                           setState(() {
                             _selectedDate = picked;
-                            guest.birthDate = "${picked.toLocal()}".split(' ')[0];  // Only assign the date part
+                            guest.birthDate = "${picked.toLocal()}"
+                                .split(' ')[0]; // Only assign the date part
                           });
                         }
                       }
@@ -218,13 +225,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       child: _selectedDate != null
                           ? Text(
-                        "${_selectedDate!.toLocal()}".split(' ')[0],
-                        style: const TextStyle(fontSize: 16),
-                      )
+                              "${_selectedDate!.toLocal()}".split(' ')[0],
+                              style: const TextStyle(fontSize: 16),
+                            )
                           : const Text(
-                        'Select Birth Date',
-                        style: TextStyle(fontSize: 16),
-                      ),
+                              'Select Birth Date',
+                              style: TextStyle(fontSize: 16),
+                            ),
                     ),
                   ),
                 ),
@@ -294,11 +301,24 @@ class _RegisterPageState extends State<RegisterPage> {
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                   child: ElevatedButton(
                     onPressed: _selectedDate != null
-                        ? () {
-                      if (_formKey.currentState!.validate()) {
-                        print(guest.birthDate);
-                      }
-                    }
+                        ? () async {
+                            if (_formKey.currentState!.validate()) {
+                              dynamic result =
+                                  await _auth.registerWithEmailAndPassword(
+                                      guest.email!, guest.password!);
+                              if (result == null) {
+                                setState(() {
+                                  message = "Something went wrong";
+                                  messageColor = Colors.red;
+                                });
+                              } else {
+                                setState(() {
+                                  message = 'Successfully Signed Up !';
+                                  messageColor = Colors.green;
+                                });
+                              }
+                            }
+                          }
                         : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,

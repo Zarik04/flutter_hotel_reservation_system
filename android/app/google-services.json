@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "183138651320",
+    "project_id": "hotel-reservation-system-3f355",
+    "storage_bucket": "hotel-reservation-system-3f355.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:183138651320:android:f58ba39abe06a1023eb84d",
+        "android_client_info": {
+          "package_name": "com.example.flutter_hotel_reservation_system"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLF6GghQqDUJul8z50qrFApcd_OsPd0pw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

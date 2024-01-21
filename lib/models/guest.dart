@@ -1,20 +1,14 @@
 class Guest {
-  String firstName,
-      lastName,
-      email,
-      passportNumber,
-      birthDate,
-      phone,
-      password;
-  String? imagePath;
+  String? uid,imagePath, firstName, lastName, email, passportNumber, birthDate, phone, password;
 
   Guest(
-      {required this.firstName,
-      required this.lastName,
+      {this.uid,
+      this.firstName,
+      this.lastName,
       this.imagePath,
-      required this.email,
-      required this.passportNumber,
-      required this.birthDate,
-      required this.phone,
-      required this.password});
+      this.email,
+      this.passportNumber,
+      this.birthDate,
+      this.phone,
+      this.password});
 }

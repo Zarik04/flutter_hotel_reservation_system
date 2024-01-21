@@ -69,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 10,
                   ),
                   Text(
-                    widget.guest.firstName,
+                    widget.guest.firstName!,
                     style: TextStyle(
                       fontSize: 25,
                       color: ProfilePage.valueThemeColor,
@@ -93,7 +93,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 10,
                   ),
                   Text(
-                    widget.guest.lastName,
+                    widget.guest.lastName!,
                     style: TextStyle(
                       fontSize: 25,
                       color: ProfilePage.valueThemeColor,
@@ -119,7 +119,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 10,
                   ),
                   Text(
-                    widget.guest.email,
+                    widget.guest.email!,
                     style: TextStyle(
                       fontSize: 20,
                       color: ProfilePage.valueThemeColor,
@@ -145,7 +145,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 10,
                   ),
                   Text(
-                    widget.guest.passportNumber,
+                    widget.guest.passportNumber!,
                     style: TextStyle(
                       fontSize: 20,
                       color: ProfilePage.valueThemeColor,
@@ -171,7 +171,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 10,
                   ),
                   Text(
-                    widget.guest.birthDate,
+                    widget.guest.birthDate!,
                     style: TextStyle(
                       fontSize: 20,
                       color: ProfilePage.valueThemeColor,
@@ -197,7 +197,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     width: 10,
                   ),
                   Text(
-                    widget.guest.phone,
+                    widget.guest.phone!,
                     style: TextStyle(
                       fontSize: 20,
                       color: ProfilePage.valueThemeColor,
@@ -224,8 +224,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Text(
                     ProfilePage.isPasswordHidden
-                        ? '*' * widget.guest.password.length
-                        : widget.guest.password,
+                        ? '*' * widget.guest.password!.length
+                        : widget.guest.password!,
                     style: TextStyle(
                       fontSize: 20,
                       color: ProfilePage.valueThemeColor,
