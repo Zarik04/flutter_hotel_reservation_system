@@ -23,6 +23,19 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(
+                Icons.menu,
+                color: Colors.white,
+                size: 26.0,
+              ),
+              // Set your color and size here
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            );
+          },
+        ),
         title: const Text(
           'Profile Page',
           style: TextStyle(color: Colors.white),
@@ -38,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Center(
                 child: CircleAvatar(
                   radius: 100,
-                  backgroundImage: AssetImage(widget.guest.imagePath),
+                  backgroundImage: AssetImage(widget.guest.imagePath!),
                 ),
               ),
               const SizedBox(height: 35),
@@ -107,6 +120,58 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   Text(
                     widget.guest.email,
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: ProfilePage.valueThemeColor,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                children: [
+                  const Text(
+                    'Passport No:',
+                    style: TextStyle(
+                      color: ProfilePage.labelThemeColor,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    widget.guest.passportNumber,
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: ProfilePage.valueThemeColor,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Row(
+                children: [
+                  const Text(
+                    'Birth Date:',
+                    style: TextStyle(
+                      color: ProfilePage.labelThemeColor,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    widget.guest.birthDate,
                     style: TextStyle(
                       fontSize: 20,
                       color: ProfilePage.valueThemeColor,

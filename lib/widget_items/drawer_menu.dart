@@ -68,6 +68,8 @@ class _DrawerMenuState extends State<DrawerMenu> {
                 lastName: 'Walker',
                 imagePath: 'img/ava.jpg',
                 email: 'sample@example.com',
+                passportNumber: 'AA000000',
+                birthDate: '1975-10-25',
                 phone: '+12345678554',
                 password: 'strong_password'
               ),

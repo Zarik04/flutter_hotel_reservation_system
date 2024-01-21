@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hotel_reservation_system/screens/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+  const RegisterPage({super.key});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -11,6 +11,9 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   DateTime? _selectedDate;
   static const Color mainThemeColor = Colors.deepPurple;
+  final _formKey = GlobalKey<FormState>();
+  String message = '';
+  MaterialColor messageColor = Colors.red;
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
@@ -31,12 +34,12 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 60.0),
+          child: Form(
+            key: _formKey,
             child: Column(
               children: [
                 const Padding(
-                  padding: EdgeInsets.all(25.0),
+                  padding: EdgeInsets.all(10.0),
                   child: Text(
                     'Registration',
                     style: TextStyle(
@@ -47,8 +50,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-                  child: TextField(
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: TextFormField(
                     decoration: InputDecoration(
                       hintText: 'First Name',
                       prefixIcon: const Icon(
@@ -63,8 +66,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-                  child: TextField(
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Last Name',
                       prefixIcon: const Icon(
@@ -79,8 +82,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-                  child: TextField(
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Contact Number',
                       prefixIcon: const Icon(
@@ -95,8 +98,24 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-                  child: TextField(
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      hintText: 'Passport No',
+                      prefixIcon: const Icon(
+                        Icons.document_scanner_rounded,
+                        color: mainThemeColor,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Email Address',
                       prefixIcon: const Icon(
@@ -111,7 +130,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                   child: InkWell(
                     onTap: () => _selectDate(context),
                     child: InputDecorator(
@@ -139,8 +158,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-                  child: TextField(
+                      const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  child: TextFormField(
                     obscureText: true,
                     decoration: InputDecoration(
                       hintText: 'Password',
@@ -152,6 +171,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
+                  ),
+                ),
+                Text(
+                  message,
+                  style: TextStyle(
+                    color: messageColor,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 15.0,
                   ),
                 ),
                 Padding(

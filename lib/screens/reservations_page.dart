@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widget_items/drawer_menu.dart';
 
-
 class ReservationScreen extends StatefulWidget {
   const ReservationScreen({super.key});
 
@@ -29,7 +28,23 @@ class _ReservationScreenState extends State<ReservationScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        title: const Text('Reservations'),
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(
+                Icons.menu,
+                color: Colors.white,
+                size: 26.0,
+              ),
+              // Set your color and size here
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            );
+          },
+        ),
+        title: const Text(
+          'Reservations',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       drawer: const DrawerMenu(),
       body: SingleChildScrollView(
@@ -42,7 +57,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                 onPressed: () {
                   // Find the active reservation
                   Item activeReservation = _data.firstWhere(
-                        (item) => item.headerValue == 'Active Reservation',
+                    (item) => item.headerValue == 'Active Reservation',
                   );
 
                   // Set the selected reservation
@@ -51,7 +66,8 @@ class _ReservationScreenState extends State<ReservationScreen> {
                   });
                 },
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white, backgroundColor: Colors.blue,
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.blue,
                 ),
                 child: const Text('Show Active Reservation'),
               ),
@@ -62,7 +78,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                 onPressed: () {
                   // Find the non-active reservation
                   Item nonActiveReservation = _data.firstWhere(
-                        (item) => item.headerValue == 'Passive Reservation',
+                    (item) => item.headerValue == 'Passive Reservation',
                   );
 
                   // Set the selected reservation
@@ -71,7 +87,8 @@ class _ReservationScreenState extends State<ReservationScreen> {
                   });
                 },
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.white, backgroundColor: Colors.orange,
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.orange,
                 ),
                 child: const Text('Show Non-Active Reservation'),
               ),

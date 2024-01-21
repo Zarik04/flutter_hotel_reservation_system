@@ -62,7 +62,6 @@ class DashboardPage extends StatelessWidget {
       imageUrl: 'img/hotel7.jpg',
       rating: 4.6,
       location: ' Vienna',
-      
     ),
     Hotel(
       name: 'The Fullerton Hotel',
@@ -79,7 +78,23 @@ class DashboardPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        title: const Text('Dashboard'),
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(
+                Icons.menu,
+                color: Colors.white,
+                size: 26.0,
+              ),
+              // Set your color and size here
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            );
+          },
+        ),
+        title: const Text(
+          'Dashboard',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: HotelCardList(hotels: hotels),
       drawer: const DrawerMenu(),
