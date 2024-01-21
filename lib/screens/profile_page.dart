@@ -23,7 +23,10 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        title: const Text('Profile Page'),
+        title: const Text(
+          'Profile Page',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       drawer: const DrawerMenu(),
       body: Padding(
@@ -172,11 +175,14 @@ class _ProfilePageState extends State<ProfilePage> {
                     highlightColor: Colors.transparent,
                     onPressed: () {
                       setState(() {
-                        ProfilePage.isPasswordHidden = !ProfilePage.isPasswordHidden;
+                        ProfilePage.isPasswordHidden =
+                            !ProfilePage.isPasswordHidden;
                       });
                     },
                     icon: Icon(
-                      ProfilePage.isPasswordHidden? Icons.visibility:Icons.visibility_off,
+                      ProfilePage.isPasswordHidden
+                          ? Icons.visibility
+                          : Icons.visibility_off,
                     ),
                   )
                 ],
@@ -185,7 +191,10 @@ class _ProfilePageState extends State<ProfilePage> {
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: ProfilePage.labelThemeColor,
-                  padding: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10.0,
+                    horizontal: 20.0,
+                  ),
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -194,7 +203,13 @@ class _ProfilePageState extends State<ProfilePage> {
                         builder: (context) => const ReservationScreen()),
                   );
                 },
-                child: const Text('View Reservation History'),
+                child: const Text(
+                  'View Reservation History',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             ],
           ),
