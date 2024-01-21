@@ -29,19 +29,6 @@ class _RegisterPageState extends State<RegisterPage> {
     password: '',
   );
 
-  // Future<void> _selectDate(BuildContext context) async {
-  //   final DateTime? picked = await showDatePicker(
-  //     context: context,
-  //     initialDate: DateTime.now(),
-  //     firstDate: DateTime(1900),
-  //     lastDate: DateTime.now(),
-  //   );
-  //   if (picked != null && picked != _selectedDate) {
-  //     setState(() {
-  //       _selectedDate = picked;
-  //     });
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -155,34 +142,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   },
                   obscureText: false,
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(
-                //       vertical: 5.0, horizontal: 25.0),
-                //   child: InkWell(
-                //     onTap: () => _selectDate(context),
-                //     child: InputDecorator(
-                //       decoration: InputDecoration(
-                //         hintText: 'Date of Birth',
-                //         prefixIcon: const Icon(
-                //           Icons.calendar_today,
-                //           color: mainThemeColor,
-                //         ),
-                //         border: OutlineInputBorder(
-                //           borderRadius: BorderRadius.circular(20),
-                //         ),
-                //       ),
-                //       child: _selectedDate != null
-                //           ? Text(
-                //               "${_selectedDate!.toLocal()}".split(' ')[0],
-                //               style: const TextStyle(fontSize: 16),
-                //             )
-                //           : const Text(
-                //               'Select Birth Date',
-                //               style: TextStyle(fontSize: 16),
-                //             ),
-                //     ),
-                //   ),
-                // ),
+
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       vertical: 5.0, horizontal: 25.0),

@@ -14,10 +14,12 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  static const MaterialColor mainThemeColor = Colors.deepPurple;
 
   String email = '';
   String password = '';
-  static const MaterialColor mainThemeColor = Colors.deepPurple;
+  String message = '';
+  MaterialColor messageColor = Colors.red;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,16 @@ class _LoginPageState extends State<LoginPage> {
                       hintText: 'Email Address',
                       icon: Icons.mail,
                       color: mainThemeColor,
-                      validatorFunc: (String? val) {},
+                      validatorFunc: (String? val) {
+                        Pattern pattern =
+                            r'^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+';
+                        RegExp regex = RegExp(pattern as String);
+                        if (!regex.hasMatch(val!)) {
+                          return 'Enter valid email';
+                        } else {
+                          return null;
+                        }
+                      },
                       obscureText: false,
                       changedFunc: (String? val) {
                         email = val!;
@@ -58,11 +69,27 @@ class _LoginPageState extends State<LoginPage> {
                       hintText: 'Password',
                       icon: Icons.lock,
                       color: mainThemeColor,
-                      validatorFunc: (String? val) {},
+                      validatorFunc: (String? val) {
+                        val = val!.trim();
+                        if (val == null || val.isEmpty) {
+                          return 'Please enter your password';
+                        } else if (val.length < 8) {
+                          return 'Password must be at least 8 characters long';
+                        }
+                        return null;
+                      },
                       obscureText: true,
                       changedFunc: (String? val) {
                         password = val!;
                       },
+                    ),
+                    Text(
+                      message,
+                      style: TextStyle(
+                        color: messageColor,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15.0,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -104,11 +131,13 @@ class _LoginPageState extends State<LoginPage> {
                           vertical: 10, horizontal: 25),
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const DashboardPage()),
-                          );
+                          if (_formKey.currentState!.validate()) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const DashboardPage()),
+                            );
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white,
