@@ -5,10 +5,19 @@ class CustomTextField extends StatelessWidget {
   final IconData icon;
   final MaterialColor color;
   final String? Function(String?)? validatorFunc;
-  bool obscureText=false;
+  final void Function(String?)? changedFunc;
 
-  CustomTextField(
-      {super.key, required this.hintText, required this.icon, required this.color, required this.validatorFunc, required this.obscureText});
+  bool obscureText = false;
+
+  CustomTextField({
+    super.key,
+    required this.hintText,
+    required this.icon,
+    required this.color,
+    required this.validatorFunc,
+    required this.obscureText,
+    required this.changedFunc,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +36,7 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         validator: validatorFunc,
-
+        onChanged: changedFunc,
       ),
     );
   }

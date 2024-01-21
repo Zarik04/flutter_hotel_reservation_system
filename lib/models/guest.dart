@@ -1,5 +1,5 @@
 class Guest {
-  final String firstName,
+  String firstName,
       lastName,
       email,
       passportNumber,

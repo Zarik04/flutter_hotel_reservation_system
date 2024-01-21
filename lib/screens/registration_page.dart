@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hotel_reservation_system/models/guest.dart';
 import 'package:flutter_hotel_reservation_system/screens/login_page.dart';
 import 'package:flutter_hotel_reservation_system/widget_items/custom_text_field.dart';
 
@@ -16,19 +17,29 @@ class _RegisterPageState extends State<RegisterPage> {
   String message = '';
   MaterialColor messageColor = Colors.red;
 
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime.now(),
-    );
-    if (picked != null && picked != _selectedDate) {
-      setState(() {
-        _selectedDate = picked;
-      });
-    }
-  }
+  Guest guest = Guest(
+    firstName: '',
+    lastName: '',
+    email: '',
+    passportNumber: '',
+    birthDate: '',
+    phone: '',
+    password: '',
+  );
+
+  // Future<void> _selectDate(BuildContext context) async {
+  //   final DateTime? picked = await showDatePicker(
+  //     context: context,
+  //     initialDate: DateTime.now(),
+  //     firstDate: DateTime(1900),
+  //     lastDate: DateTime.now(),
+  //   );
+  //   if (picked != null && picked != _selectedDate) {
+  //     setState(() {
+  //       _selectedDate = picked;
+  //     });
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +72,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       return null;
                     }
                   },
+                  changedFunc: (String? val) {
+                    setState(() {
+                      guest.firstName = val!;
+                    });
+                  },
                   obscureText: false,
                 ),
                 CustomTextField(
@@ -74,6 +90,11 @@ class _RegisterPageState extends State<RegisterPage> {
                     } else {
                       return null;
                     }
+                  },
+                  changedFunc: (String? val) {
+                    setState(() {
+                      guest.lastName = val!;
+                    });
                   },
                   obscureText: false,
                 ),
@@ -91,6 +112,9 @@ class _RegisterPageState extends State<RegisterPage> {
                       return null;
                     }
                   },
+                  changedFunc: (String? val) {
+                    guest.phone = val!;
+                  },
                   obscureText: false,
                 ),
                 CustomTextField(
@@ -103,6 +127,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       return 'Please enter the passport no';
                     }
                     return null;
+                  },
+                  changedFunc: (String? val) {
+                    setState(() {
+                      guest.passportNumber = val!;
+                    });
                   },
                   obscureText: false,
                 ),
@@ -119,13 +148,63 @@ class _RegisterPageState extends State<RegisterPage> {
                       return null;
                     }
                   },
+                  changedFunc: (String? val) {
+                    guest.email = val!;
+                  },
                   obscureText: false,
                 ),
+                // Padding(
+                //   padding: const EdgeInsets.symmetric(
+                //       vertical: 5.0, horizontal: 25.0),
+                //   child: InkWell(
+                //     onTap: () => _selectDate(context),
+                //     child: InputDecorator(
+                //       decoration: InputDecoration(
+                //         hintText: 'Date of Birth',
+                //         prefixIcon: const Icon(
+                //           Icons.calendar_today,
+                //           color: mainThemeColor,
+                //         ),
+                //         border: OutlineInputBorder(
+                //           borderRadius: BorderRadius.circular(20),
+                //         ),
+                //       ),
+                //       child: _selectedDate != null
+                //           ? Text(
+                //               "${_selectedDate!.toLocal()}".split(' ')[0],
+                //               style: const TextStyle(fontSize: 16),
+                //             )
+                //           : const Text(
+                //               'Select Birth Date',
+                //               style: TextStyle(fontSize: 16),
+                //             ),
+                //     ),
+                //   ),
+                // ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 5.0, horizontal: 25.0),
+                  padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 25.0),
                   child: InkWell(
-                    onTap: () => _selectDate(context),
+                    onTap: () async {
+                      final DateTime? picked = await showDatePicker(
+                        context: context,
+                        initialDate: _selectedDate ?? DateTime.now(),
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                      );
+                      if (picked != null) {
+                        if (DateTime.now().difference(picked).inDays / 365 < 18) {
+                          // The user is not 18 years old yet
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('You must be at least 18 years old.')),
+                          );
+                        } else {
+                          setState(() {
+                            _selectedDate = picked;
+                            guest.birthDate = "${picked.toLocal()}".split(' ')[0];  // Only assign the date part
+                          });
+                        }
+                      }
+                    },
                     child: InputDecorator(
                       decoration: InputDecoration(
                         hintText: 'Date of Birth',
@@ -139,13 +218,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       ),
                       child: _selectedDate != null
                           ? Text(
-                              "${_selectedDate!.toLocal()}".split(' ')[0],
-                              style: const TextStyle(fontSize: 16),
-                            )
+                        "${_selectedDate!.toLocal()}".split(' ')[0],
+                        style: const TextStyle(fontSize: 16),
+                      )
                           : const Text(
-                              'Select Birth Date',
-                              style: TextStyle(fontSize: 16),
-                            ),
+                        'Select Birth Date',
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
                   ),
                 ),
@@ -162,10 +241,13 @@ class _RegisterPageState extends State<RegisterPage> {
                     }
                     return null;
                   },
+                  changedFunc: (String? val) {
+                    guest.password = val!;
+                  },
                   obscureText: true,
                 ),
                 Text(
-                  'red',
+                  message,
                   style: TextStyle(
                     color: messageColor,
                     fontWeight: FontWeight.w600,
@@ -211,16 +293,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 25),
                   child: ElevatedButton(
-                    onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const LoginPage()),
-                      // );
+                    onPressed: _selectedDate != null
+                        ? () {
                       if (_formKey.currentState!.validate()) {
-                        print("correct");
+                        print(guest.birthDate);
                       }
-                    },
+                    }
+                        : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       side: const BorderSide(color: mainThemeColor, width: 2),
