@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hotel_reservation_system/screens/registration_page.dart';
 import 'package:flutter_hotel_reservation_system/screens/dashboard.dart';
+import 'package:flutter_hotel_reservation_system/services/auth.dart';
+import 'package:flutter_hotel_reservation_system/widget_items/custom_text_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -10,7 +12,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  static const Color mainThemeColor = Colors.deepPurple;
+  final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+
+  String email = '';
+  String password = '';
+  static const MaterialColor mainThemeColor = Colors.deepPurple;
 
   @override
   Widget build(BuildContext context) {
@@ -20,118 +27,112 @@ class _LoginPageState extends State<LoginPage> {
           child: Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 150.0),
-              child: Column(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.all(25.0),
-                    child: Text(
-                      'Login Page',
-                      style: TextStyle(
-                          color: mainThemeColor,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 15, horizontal: 25),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Email Address',
-                        prefixIcon: const Icon(
-                          Icons.mail,
-                          color: mainThemeColor,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(25.0),
+                      child: Text(
+                        'Login Page',
+                        style: TextStyle(
+                            color: mainThemeColor,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 25),
-                    child: TextField(
+                    CustomTextField(
+                      hintText: 'Email Address',
+                      icon: Icons.mail,
+                      color: mainThemeColor,
+                      validatorFunc: (String? val) {},
+                      obscureText: false,
+                      changedFunc: (String? val) {
+                        email = val!;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    CustomTextField(
+                      hintText: 'Password',
+                      icon: Icons.lock,
+                      color: mainThemeColor,
+                      validatorFunc: (String? val) {},
                       obscureText: true,
-                      decoration: InputDecoration(
-                        hintText: 'Password',
-                        prefixIcon: const Icon(
-                          Icons.lock,
-                          color: mainThemeColor,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
+                      changedFunc: (String? val) {
+                        password = val!;
+                      },
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Don\'t have an account?',
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                        const SizedBox(width: 5.0),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const RegisterPage()),
-                            );
-                          },
-                          style: ButtonStyle(
-                            overlayColor: MaterialStateProperty.all(
-                                Colors.transparent), // To remove after effects
-                          ),
-                          child: const Text(
-                            'Sign Up',
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Don\'t have an account?',
                             style: TextStyle(
-                              color: Colors.indigo,
                               fontSize: 16,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 25),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const DashboardPage()),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        side: const BorderSide(color: mainThemeColor, width: 2),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: 13.0, horizontal: 30.0),
-                        child: Text(
-                          'Login',
-                          style: TextStyle(
-                              color: mainThemeColor,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        ),
+                          const SizedBox(width: 5.0),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const RegisterPage()),
+                              );
+                            },
+                            style: ButtonStyle(
+                              overlayColor: MaterialStateProperty.all(Colors
+                                  .transparent), // To remove after effects
+                            ),
+                            child: const Text(
+                              'Sign Up',
+                              style: TextStyle(
+                                color: Colors.indigo,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 25),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const DashboardPage()),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          side:
+                              const BorderSide(color: mainThemeColor, width: 2),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 13.0, horizontal: 30.0),
+                          child: Text(
+                            'Login',
+                            style: TextStyle(
+                                color: mainThemeColor,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
