@@ -1,4 +1,24 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
+
+import 'package:flutter_hotel_reservation_system/screens/booking_detail.dart';
+import 'package:flutter_hotel_reservation_system/screens/payment_process.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HotelPage(
+        hotelName: 'Sample Hotel',
+        image: 'img/hotel_image.jpg',
+      ),
+    );
+  }
+}
 
 class HotelPage extends StatelessWidget {
   final String hotelName;
@@ -10,8 +30,9 @@ class HotelPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(hotelName),
+        title: Text(hotelName,style: TextStyle(color: Colors.white),),
         backgroundColor: Colors.deepPurple,
+        iconTheme: IconThemeData(color:Colors.white),
       ),
       body: ListView(
         children: [
@@ -49,37 +70,34 @@ class HotelPage extends StatelessWidget {
                   'Two-Bedroom Apartment',
                   'Bedroom 1: 1 large double bed\nBedroom 2: 2 single beds',
                   [
-                    'img/hotel1.jpg',
-                    'img/hotel2.jpg',
-                    'img/hotel3.jpg',
+                    'img/room1.jpg',
+                    'img/roomw2.jpg',
+                    'img/room3.jpeg',
                     'img/hotel4.jpg',
                   ],
                   '4+',
-                  'Show prices',
                 ),
                 RoomTypeCard(
                   'Budget Twin Room with Shared Bathroom and Kitchen',
                   '2 single beds',
                   [
-                    'img/hotel1.jpg',
-                    'img/hotel2.jpg',
-                    'img/hotel3.jpg',
-                    'img/hotel4.jpg',
+                    'img/room11.jpg',
+                    'img/room3.jpeg',
+                    'img/room1.jpg',
+                    'img/roomw2.jpg',
                   ],
                   '2',
-                  'Show prices',
                 ),
                 RoomTypeCard(
                   'Budget Double Room with Shared Bathroom and Kitchen',
                   '2 single beds',
                   [
-                    'img/hotel1.jpg',
-                    'img/hotel2.jpg',
-                    'img/hotel3.jpg',
+                    'img/room33.jpg.crdownload',
+                    'img/room44.jpg',
+                    'img/room1.jpg',
                     'img/hotel4.jpg',
                   ],
                   '2',
-                  'Show prices',
                 ),
               ],
             ),
@@ -95,10 +113,8 @@ class RoomTypeCard extends StatelessWidget {
   final String description;
   final List<String> images;
   final String guests;
-  final String priceButtonText;
 
-  RoomTypeCard(this.type, this.description, this.images, this.guests,
-      this.priceButtonText);
+  RoomTypeCard(this.type, this.description, this.images, this.guests);
 
   @override
   Widget build(BuildContext context) {
@@ -148,21 +164,28 @@ class RoomTypeCard extends StatelessWidget {
               style: TextStyle(fontSize: 16.0),
             ),
             SizedBox(height: 8.0),
-            GestureDetector(
-              onTap: () {
-                _handleShowPricesClick(context);
-              },
-              child: Container(
-                padding: EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  color: Colors.deepPurple,
-                  borderRadius: BorderRadius.circular(8.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    _handleShowPricesClick(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.deepPurple,
+                  ),
+                  child: Text('Show Prices', style: TextStyle(color: Colors.white)),
                 ),
-                child: Text(
-                  priceButtonText,
-                  style: TextStyle(fontSize: 16.0, color: Colors.white),
+                ElevatedButton(
+                  onPressed: () {
+                    _handleProceedToPayment(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.deepPurple,
+                  ),
+                  child: Text('Proceed to Payment', style: TextStyle(color: Colors.white)),
                 ),
-              ),
+              ],
             ),
           ],
         ),
@@ -171,12 +194,16 @@ class RoomTypeCard extends StatelessWidget {
   }
 
   void _handleShowPricesClick(BuildContext context) {
+    final Random random = Random();
+    final double randomPrice = random.nextDouble() * 100.0;
+
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           title: Text('Prices'),
-          content: Text('Prices for $type'),
+          content: Text(
+              'The Price of the room: \$${randomPrice.toStringAsFixed(2)}'),
           actions: [
             TextButton(
               onPressed: () {
@@ -189,4 +216,15 @@ class RoomTypeCard extends StatelessWidget {
       },
     );
   }
+
+  void _handleProceedToPayment(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            PaymentScreen(roomType: type, roomImages: images),
+      ),
+    );
+  }
 }
+
