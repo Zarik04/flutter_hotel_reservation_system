@@ -92,7 +92,7 @@ class HotelPage extends StatelessWidget {
                   'Budget Double Room with Shared Bathroom and Kitchen',
                   '2 single beds',
                   [
-                    'img/room33.jpg.crdownload',
+                    'img/devroom.jpg.crdownload',
                     'img/room44.jpg',
                     'img/room1.jpg',
                     'img/hotel4.jpg',
