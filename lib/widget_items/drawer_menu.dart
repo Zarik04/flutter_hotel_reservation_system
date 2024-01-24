@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hotel_reservation_system/models/guest.dart';
+import 'package:flutter_hotel_reservation_system/screens/help_screen.dart';
 import 'package:flutter_hotel_reservation_system/screens/login_page.dart';
 import 'package:flutter_hotel_reservation_system/screens/reservations_page.dart';
 import 'package:flutter_hotel_reservation_system/widget_items/drawer_menu_items.dart';
@@ -80,10 +81,10 @@ class _DrawerMenuState extends State<DrawerMenu> {
             iconName: Icons.list_alt_rounded,
             routeToPage: ReservationScreen(),
           ),
-          const DrawerItem(
+           DrawerItem(
             itemName: 'Help',
             iconName: Icons.help_rounded,
-            routeToPage: DashboardPage(),
+            routeToPage: HelpPage(),
           ),
           const DrawerItem(
             itemName: 'Log Out',
