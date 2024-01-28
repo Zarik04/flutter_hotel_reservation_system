@@ -26,4 +26,9 @@ class DatabaseService {
       'birthDate': birthDate,
     });
   }
+
+  Future<DocumentSnapshot> fetchGuestData() async {
+    return await users.doc(uid).get();
+  }
+
 }

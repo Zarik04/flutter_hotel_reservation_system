@@ -3,6 +3,7 @@ import 'package:flutter_hotel_reservation_system/models/guest.dart';
 import 'package:flutter_hotel_reservation_system/screens/help_screen.dart';
 import 'package:flutter_hotel_reservation_system/screens/login_page.dart';
 import 'package:flutter_hotel_reservation_system/screens/reservations_page.dart';
+import 'package:flutter_hotel_reservation_system/services/auth.dart';
 import 'package:flutter_hotel_reservation_system/widget_items/drawer_menu_items.dart';
 import '../screens/dashboard.dart';
 import '../screens/profile_page.dart';
@@ -65,15 +66,14 @@ class _DrawerMenuState extends State<DrawerMenu> {
             iconName: Icons.person_rounded,
             routeToPage: ProfilePage(
               guest: Guest(
-                firstName: 'Alan',
-                lastName: 'Walker',
-                imagePath: 'img/ava.jpg',
-                email: 'sample@example.com',
-                passportNumber: 'AA000000',
-                birthDate: '1975-10-25',
-                phone: '+12345678554',
-                password: 'strong_password'
-              ),
+                  firstName: 'Alan',
+                  lastName: 'Walker',
+                  imagePath: 'img/ava.jpg',
+                  email: 'sample@example.com',
+                  passportNumber: 'AA000000',
+                  birthDate: '1975-10-25',
+                  phone: '+12345678554',
+                  password: 'strong_password'),
             ),
           ),
           const DrawerItem(
@@ -81,16 +81,35 @@ class _DrawerMenuState extends State<DrawerMenu> {
             iconName: Icons.list_alt_rounded,
             routeToPage: ReservationScreen(),
           ),
-           DrawerItem(
+          DrawerItem(
             itemName: 'Help',
             iconName: Icons.help_rounded,
             routeToPage: HelpPage(),
           ),
-          const DrawerItem(
-            itemName: 'Log Out',
-            iconName: Icons.exit_to_app_rounded,
-            routeToPage: LoginPage(),
-          ),
+          ListTile(
+            title: Text(
+              'Log Out',
+              style: TextStyle(
+                color: Colors.deepPurple.shade300,
+                fontWeight: FontWeight.w800,
+                fontSize: 16.0,
+              ),
+            ),
+            leading: const Icon(
+              Icons.exit_to_app_rounded,
+              color: Colors.deepPurple,
+              size: 30.0,
+            ),
+            onTap: () async {
+              final AuthService _auth = AuthService();
+              await _auth.signOut();
+              await _auth.signOut();
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+              );
+            },
+          )
         ],
       ),
     );

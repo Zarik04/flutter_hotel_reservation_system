@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../widget_items/drawer_menu.dart';
 
 class ReservationScreen extends StatefulWidget {
-  const ReservationScreen({Key? key}) : super(key: key);
+  const ReservationScreen({super.key});
 
   @override
   _ReservationScreenState createState() => _ReservationScreenState();
@@ -65,8 +65,8 @@ class _ReservationScreenState extends State<ReservationScreen> {
                   });
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.deepPurple,
-                  onPrimary: Colors.white,
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.deepPurple,
                 ),
                 child: const Text('Show Active Reservation'),
               ),
@@ -86,8 +86,8 @@ class _ReservationScreenState extends State<ReservationScreen> {
                   });
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.deepOrange,
-                  onPrimary: Colors.white,
+                  foregroundColor: Colors.white,
+                  backgroundColor: Colors.deepOrange,
                 ),
                 child: const Text('Show Non-Active Reservation'),
               ),
@@ -137,7 +137,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
 class HotelTile extends StatelessWidget {
   final String name;
 
-  const HotelTile({Key? key, required this.name}) : super(key: key);
+  const HotelTile({super.key, required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -146,11 +146,10 @@ class HotelTile extends StatelessWidget {
       leading: Container(
         width: 60,
         height: 60,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           shape: BoxShape.circle,
           image: DecorationImage(
-            image:
-                AssetImage('img/hotel1.jpg'), // Replace with your image
+            image: AssetImage('img/hotel1.jpg'), // Replace with your image
             fit: BoxFit.cover,
           ),
         ),
