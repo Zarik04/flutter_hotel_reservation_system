@@ -4,7 +4,9 @@ import 'package:flutter_hotel_reservation_system/screens/help_screen.dart';
 import 'package:flutter_hotel_reservation_system/screens/login_page.dart';
 import 'package:flutter_hotel_reservation_system/screens/reservations_page.dart';
 import 'package:flutter_hotel_reservation_system/services/auth.dart';
+import 'package:flutter_hotel_reservation_system/services/providers/hotel_provider.dart';
 import 'package:flutter_hotel_reservation_system/widget_items/drawer_menu_items.dart';
+import 'package:provider/provider.dart';
 import '../screens/dashboard.dart';
 import '../screens/profile_page.dart';
 
@@ -103,7 +105,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
             onTap: () async {
               final AuthService _auth = AuthService();
               await _auth.signOut();
-              await _auth.signOut();
+              Provider.of<HotelProvider>(context, listen: false).clean();
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const LoginPage()),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hotel_reservation_system/models/hotel.dart';
 import 'package:flutter_hotel_reservation_system/screens/registration_page.dart';
 import 'package:flutter_hotel_reservation_system/screens/dashboard.dart';
 import 'package:flutter_hotel_reservation_system/services/auth.dart';
-import 'package:flutter_hotel_reservation_system/services/hotel_db.dart';
+import 'package:flutter_hotel_reservation_system/services/providers/hotel_provider.dart';
 import 'package:flutter_hotel_reservation_system/widget_items/custom_text_field.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -136,63 +136,18 @@ class _LoginPageState extends State<LoginPage> {
                           if (_formKey.currentState!.validate()) {
                             dynamic result = await _auth
                                 .signInWithEmailAndPassword(email, password);
-                            // List<Hotel> hotels = [
-                            //   Hotel(
-                            //     name: 'The Plaza Hotel',
-                            //     imageUrl: 'img/hotel8.jpg',
-                            //     rating: 4.9,
-                            //     location: ' New York City',
-                            //   ),
-                            //   Hotel(
-                            //     name: 'Grand Lisboa',
-                            //     imageUrl: 'img/hotel2.jpg',
-                            //     rating: 4.2,
-                            //     location: ' Macau',
-                            //   ),
-                            //   Hotel(
-                            //     name: 'Hilton Worldwide',
-                            //     imageUrl: 'img/hotel3.jpg',
-                            //     rating: 4.0,
-                            //     location: ' New York City',
-                            //   ),
-                            //   Hotel(
-                            //     name: 'Grand Hyatt',
-                            //     imageUrl: 'img/hotel4.jpg',
-                            //     rating: 3.8,
-                            //     location: ' Dubai',
-                            //   ),
-                            //   Hotel(
-                            //     name: 'InterContinental',
-                            //     imageUrl: 'img/hotel5.jpg',
-                            //     rating: 4.7,
-                            //     location: 'Lusaka',
-                            //   ),
-                            //   Hotel(
-                            //     name: 'Premier Best Western',
-                            //     imageUrl: 'img/hotel6.jpg',
-                            //     rating: 4.2,
-                            //     location: ' Florida',
-                            //   ),
-                            //   Hotel(
-                            //     name: 'The Ritz-Carlton',
-                            //     imageUrl: 'img/hotel7.jpg',
-                            //     rating: 4.6,
-                            //     location: ' Vienna',
-                            //   ),
-                            //   Hotel(
-                            //     name: 'The Fullerton Hotel',
-                            //     imageUrl: 'img/hotel1.jpg',
-                            //     rating: 3.9,
-                            //     location: ' Singapore',
-                            //   ),
-                            // ];
-                            //
-                            // for (var hotel in hotels) {
-                            //   try {
-                            //     await HotelDatabase.addHotel(hotel);
-                            //   } catch(e) {
-                            //     print(e);
+
+                            await Provider.of<HotelProvider>(context,
+                                    listen: false)
+                                .fetchHotels();
+
+                            // try {
+                            //   List<Hotel> hotels = await HotelDatabase.getHotels();
+                            //   for (var hotel in hotels) {
+                            //    print('Name: ${hotel.name} Image: ${hotel.imageUrl}\n');
                             //   }
+                            // } catch (e) {
+                            //   print(e);
                             // }
 
                             if (result == null) {

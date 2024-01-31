@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hotel_reservation_system/screens/intro_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_hotel_reservation_system/firebase_options.dart';
+import 'package:flutter_hotel_reservation_system/services/providers/hotel_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -9,7 +11,14 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const HomeApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => HotelProvider()),
+      ],
+      child: const HomeApp(),
+    ),
+  );
 }
 
 class HomeApp extends StatelessWidget {

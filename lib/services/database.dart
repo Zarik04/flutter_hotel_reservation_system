@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_hotel_reservation_system/models/guest.dart';
 
 class DatabaseService {
   final String uid;
@@ -9,26 +10,28 @@ class DatabaseService {
   final CollectionReference users =
       FirebaseFirestore.instance.collection('guests');
 
-  Future updateGuestData(
-    String firstName,
-    lastName,
-    phone,
-    passportNumber,
-    email,
-    birthDate,
-  ) async {
+  Future updateGuestData(Guest guest) async {
     return await users.doc(uid).set({
-      'firstName': firstName,
-      'lastName': lastName,
-      'phone': phone,
-      'passportNumber': passportNumber,
-      'email': email,
-      'birthDate': birthDate,
+      'firstName': guest.firstName!,
+      'lastName': guest.lastName!,
+      'phone': guest.phone,
+      'passportNumber': guest.phone!,
+      'email': guest.email!,
+      'birthDate': guest.birthDate!,
     });
   }
 
-  Future<DocumentSnapshot> fetchGuestData() async {
-    return await users.doc(uid).get();
-  }
+  Future<Guest> fetchGuestData() async {
+    DocumentSnapshot doc = await users.doc(uid).get();
 
+    return Guest(
+      uid: uid,
+      firstName: doc['firstName'],
+      lastName: doc['lastName'],
+      phone: doc['phone'],
+      passportNumber: doc['passportNumber'],
+      email: doc['email'],
+      birthDate: doc['birthDate'],
+    );
+  }
 }
