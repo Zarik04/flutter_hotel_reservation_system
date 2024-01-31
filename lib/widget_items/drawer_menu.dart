@@ -5,6 +5,7 @@ import 'package:flutter_hotel_reservation_system/screens/login_page.dart';
 import 'package:flutter_hotel_reservation_system/screens/reservations_page.dart';
 import 'package:flutter_hotel_reservation_system/services/auth.dart';
 import 'package:flutter_hotel_reservation_system/services/providers/hotel_provider.dart';
+import 'package:flutter_hotel_reservation_system/services/providers/user_provider.dart';
 import 'package:flutter_hotel_reservation_system/widget_items/drawer_menu_items.dart';
 import 'package:provider/provider.dart';
 import '../screens/dashboard.dart';
@@ -20,27 +21,29 @@ class DrawerMenu extends StatefulWidget {
 class _DrawerMenuState extends State<DrawerMenu> {
   @override
   Widget build(BuildContext context) {
+    Guest guest = Provider.of<UserProvider>(context).guest;
+    guest.imagePath = 'img/ava.jpg';
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const SizedBox(
+          SizedBox(
             height: 250,
             child: UserAccountsDrawerHeader(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.deepPurple,
               ),
               accountName: Text(
-                'Alan Walker',
-                style: TextStyle(
+                guest.firstName!,
+                style: const TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.w500,
                   color: Colors.white,
                 ),
               ),
               accountEmail: Text(
-                'sample@example.com',
-                style: TextStyle(
+                guest.email!,
+                style: const TextStyle(
                   fontSize: 18,
                   color: Colors.white,
                 ),
@@ -48,14 +51,14 @@ class _DrawerMenuState extends State<DrawerMenu> {
               currentAccountPicture: CircleAvatar(
                 child: ClipOval(
                   child: Image(
-                    image: AssetImage('img/ava.jpg'),
+                    image: AssetImage(guest.imagePath!),
                     width: 100,
                     height: 100,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-              currentAccountPictureSize: Size(100.0, 100.0),
+              currentAccountPictureSize: const Size(100.0, 100.0),
             ),
           ),
           const SizedBox(height: 18.0),
@@ -67,15 +70,7 @@ class _DrawerMenuState extends State<DrawerMenu> {
             itemName: 'Profile',
             iconName: Icons.person_rounded,
             routeToPage: ProfilePage(
-              guest: Guest(
-                  firstName: 'Alan',
-                  lastName: 'Walker',
-                  imagePath: 'img/ava.jpg',
-                  email: 'sample@example.com',
-                  passportNumber: 'AA000000',
-                  birthDate: '1975-10-25',
-                  phone: '+12345678554',
-                  password: 'strong_password'),
+              guest: guest,
             ),
           ),
           const DrawerItem(

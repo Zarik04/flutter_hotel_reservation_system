@@ -7,14 +7,14 @@ import '../widget_items/drawer_menu.dart';
 class ProfilePage extends StatefulWidget {
   final Guest guest;
 
-  const ProfilePage({Key? key, required this.guest}) : super(key: key);
+  const ProfilePage({super.key, required this.guest});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  bool isPasswordHidden = true;
+  // bool isPasswordHidden = true;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class _ProfilePageState extends State<ProfilePage> {
       body: Column(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.deepPurple,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(30),
@@ -73,18 +73,18 @@ class _ProfilePageState extends State<ProfilePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.guest.firstName! + ' ' + widget.guest.lastName!,
-                        style: TextStyle(
-                          fontSize: 20,
+                        '${widget.guest.firstName!} ${widget.guest.lastName!}',
+                        style: const TextStyle(
+                          fontSize: 22,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
                       ),
-                      const SizedBox(height: 4),
+                      const SizedBox(height: 1),
                       Text(
                         widget.guest.email!,
-                        style: TextStyle(
-                          fontSize: 16,
+                        style: const TextStyle(
+                          fontSize: 17,
                           color: Colors.grey,
                         ),
                       ),
@@ -110,25 +110,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           'Passport No:', widget.guest.passportNumber!),
                       buildProfileRow('Birth Date:', widget.guest.birthDate!),
                       buildProfileRow('Phone:', widget.guest.phone!),
-                      buildProfileRow(
-                        'Password:',
-                        isPasswordHidden
-                            ? '*' * widget.guest.password!.length
-                            : widget.guest.password!,
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isPasswordHidden = !isPasswordHidden;
-                            });
-                          },
-                          icon: Icon(
-                            isPasswordHidden
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: Colors.deepPurple,
-                          ),
-                        ),
-                      ),
                       const SizedBox(height: 20),
                       ListTile(
                         leading: const Icon(Icons.language),
@@ -149,7 +130,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       const SizedBox(height: 20),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.deepPurple,
+                          backgroundColor: Colors.deepPurple,
                           padding: const EdgeInsets.symmetric(
                             vertical: 12.0,
                             horizontal: 20.0,
@@ -190,7 +171,7 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           Text(
             label,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               fontSize: 18,
               fontWeight: FontWeight.w600,
@@ -203,7 +184,7 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 Text(
                   value,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     color: Colors.black,
                     fontWeight: FontWeight.w400,
@@ -224,11 +205,10 @@ class _ProfilePageState extends State<ProfilePage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Language Preference'),
-          content: SingleChildScrollView(
+          content: const SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                const Text('Select your preferred language:'),
-                
+                Text('Select your preferred language:'),
               ],
             ),
           ),
@@ -257,10 +237,10 @@ class _ProfilePageState extends State<ProfilePage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Notification Settings'),
-          content: SingleChildScrollView(
+          content: const SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                const Text('Enable or disable notifications:'),
+                Text('Enable or disable notifications:'),
                 // Add your notification settings widgets here
               ],
             ),
@@ -301,7 +281,7 @@ class _ProfilePageState extends State<ProfilePage> {
             TextButton(
               onPressed: () {
                 Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => LoginPage()));
+                    MaterialPageRoute(builder: (context) => const LoginPage()));
               },
               child: const Text('Logout'),
             ),

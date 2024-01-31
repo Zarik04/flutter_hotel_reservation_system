@@ -22,57 +22,6 @@ class HomeApp extends StatelessWidget {
 }
 
 class DashboardPage extends StatelessWidget {
-  // static List<Hotel> hotels = [
-  //   Hotel(
-  //     name: 'The Plaza Hotel',
-  //     imageUrl: 'img/hotel8.jpg',
-  //     rating: 4.9,
-  //     location: ' New York City',
-  //   ),
-  //   Hotel(
-  //     name: 'Grand Lisboa',
-  //     imageUrl: 'img/hotel2.jpg',
-  //     rating: 4.2,
-  //     location: ' Macau',
-  //   ),
-  //   Hotel(
-  //     name: 'Hilton Worldwide',
-  //     imageUrl: 'img/hotel3.jpg',
-  //     rating: 4.0,
-  //     location: ' New York City',
-  //   ),
-  //   Hotel(
-  //     name: 'Grand Hyatt',
-  //     imageUrl: 'img/hotel4.jpg',
-  //     rating: 3.8,
-  //     location: ' Dubai',
-  //   ),
-  //   Hotel(
-  //     name: 'InterContinental',
-  //     imageUrl: 'img/hotel5.jpg',
-  //     rating: 4.7,
-  //     location: 'Lusaka',
-  //   ),
-  //   Hotel(
-  //     name: 'Premier Best Western',
-  //     imageUrl: 'img/hotel6.jpg',
-  //     rating: 4.2,
-  //     location: ' Florida',
-  //   ),
-  //   Hotel(
-  //     name: 'The Ritz-Carlton',
-  //     imageUrl: 'img/hotel7.jpg',
-  //     rating: 4.6,
-  //     location: ' Vienna',
-  //   ),
-  //   Hotel(
-  //     name: 'The Fullerton Hotel',
-  //     imageUrl: 'img/hotel1.jpg',
-  //     rating: 3.9,
-  //     location: ' Singapore',
-  //   ),
-  // ];
-
   static List<Hotel> hotels = [];
 
   const DashboardPage({super.key});

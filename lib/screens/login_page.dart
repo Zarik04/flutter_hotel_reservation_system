@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hotel_reservation_system/models/guest.dart';
 import 'package:flutter_hotel_reservation_system/screens/registration_page.dart';
 import 'package:flutter_hotel_reservation_system/screens/dashboard.dart';
 import 'package:flutter_hotel_reservation_system/services/auth.dart';
 import 'package:flutter_hotel_reservation_system/services/providers/hotel_provider.dart';
+import 'package:flutter_hotel_reservation_system/services/providers/user_provider.dart';
 import 'package:flutter_hotel_reservation_system/widget_items/custom_text_field.dart';
 import 'package:provider/provider.dart';
 
@@ -134,26 +136,19 @@ class _LoginPageState extends State<LoginPage> {
                       child: ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            dynamic result = await _auth
+                            Guest result = await _auth
                                 .signInWithEmailAndPassword(email, password);
-
-                            await Provider.of<HotelProvider>(context,
-                                    listen: false)
-                                .fetchHotels();
-
-                            // try {
-                            //   List<Hotel> hotels = await HotelDatabase.getHotels();
-                            //   for (var hotel in hotels) {
-                            //    print('Name: ${hotel.name} Image: ${hotel.imageUrl}\n');
-                            //   }
-                            // } catch (e) {
-                            //   print(e);
-                            // }
 
                             if (result == null) {
                               setState(() => message =
                                   'Please, supply valid credentials !');
                             } else {
+                              await Provider.of<HotelProvider>(context,
+                                      listen: false)
+                                  .fetchHotels();
+                              await Provider.of<UserProvider>(context,
+                                      listen: false)
+                                  .fetchUser(result.uid!);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
