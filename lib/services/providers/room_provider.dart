@@ -17,7 +17,7 @@ class RoomProvider with ChangeNotifier {
       List<Room> rooms = await RoomDatabase.getRooms(hotelId);
       for (var room in rooms) {
         loadedRooms.add(room);
-        print('Room No: ${room.roomNo} Price: ${room.price}\n');
+        // print('HotelId: ${room.hotelId} Room No: ${room.roomNo} Price: ${room.price}\n');
       }
     } catch (e) {
       print(e);

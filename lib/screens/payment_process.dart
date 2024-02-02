@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hotel_reservation_system/models/guest.dart';
+import 'package:flutter_hotel_reservation_system/models/reservation.dart';
 import 'package:flutter_hotel_reservation_system/models/room.dart';
 import 'package:flutter_hotel_reservation_system/screens/booking_detail.dart';
+import 'package:flutter_hotel_reservation_system/services/providers/user_provider.dart';
+import 'package:flutter_hotel_reservation_system/services/reservation_db.dart';
+import 'package:provider/provider.dart';
 
 class PaymentScreen extends StatefulWidget {
   final Room room;
@@ -8,7 +13,10 @@ class PaymentScreen extends StatefulWidget {
   final List<String> roomImages;
 
   const PaymentScreen(
-      {super.key, required this.room, required this.roomType, required this.roomImages});
+      {super.key,
+      required this.room,
+      required this.roomType,
+      required this.roomImages});
 
   @override
   _PaymentScreenState createState() => _PaymentScreenState();
@@ -16,9 +24,11 @@ class PaymentScreen extends StatefulWidget {
 
 class _PaymentScreenState extends State<PaymentScreen> {
   final TextEditingController _amountController = TextEditingController();
-
+  static String guestId = '';
   @override
   Widget build(BuildContext context) {
+    Guest guest = Provider.of<UserProvider>(context).guest;
+    guestId = guest.uid!;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Payment', style: TextStyle(color: Colors.white)),
@@ -108,9 +118,23 @@ class _PaymentScreenState extends State<PaymentScreen> {
     );
   }
 
-  void _handlePayment(BuildContext context) {
+  void _handlePayment(BuildContext context) async {
     double amount = double.tryParse(_amountController.text) ?? 0.0;
+    if (amount == widget.room.price) {
+      Reservation reservation = Reservation(
+        hotelId: widget.room.hotelId!,
+        roomId: widget.room.roomNo,
+        roomType: widget.room.roomType,
+        startDate: DateTime.now(),
+        endDate: DateTime.now().add(Duration(days: 10)),
+      );
+      try {
+        ReservationDatabase.addReservation(guestId, reservation);
+      } catch (e) {
+        print(e);
+      }
 
+    }
     showDialog(
       context: context,
       builder: (context) {

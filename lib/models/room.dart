@@ -1,4 +1,5 @@
 class Room {
+  String? hotelId;
   final String roomNo;
   final String roomType;
   final int bedNum;
@@ -7,6 +8,7 @@ class Room {
   final int price;
 
   Room({
+    this.hotelId,
     required this.roomNo,
     required this.roomType,
     required this.bedNum,
@@ -26,8 +28,9 @@ class Room {
     };
   }
 
-  factory Room.fromMap(Map<String, dynamic> map) {
+  factory Room.fromMap(String hotelId, Map<String, dynamic> map) {
     return Room(
+      hotelId: hotelId,
       roomNo: map['roomNo'],
       roomType: map['roomType'],
       bedNum: map['bedNum'],

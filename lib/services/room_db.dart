@@ -19,7 +19,9 @@ class RoomDatabase {
     Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
 
     return data.entries.map((entry) {
-      return Room.fromMap(entry.value);
+      return Room.fromMap(hotelId, entry.value);
     }).toList();
   }
+
+
 }
