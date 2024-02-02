@@ -5,6 +5,7 @@ import 'package:flutter_hotel_reservation_system/screens/login_page.dart';
 import 'package:flutter_hotel_reservation_system/screens/reservations_page.dart';
 import 'package:flutter_hotel_reservation_system/services/auth.dart';
 import 'package:flutter_hotel_reservation_system/services/providers/hotel_provider.dart';
+import 'package:flutter_hotel_reservation_system/services/providers/reservation_provider.dart';
 import 'package:flutter_hotel_reservation_system/services/providers/user_provider.dart';
 import 'package:flutter_hotel_reservation_system/widget_items/drawer_menu_items.dart';
 import 'package:provider/provider.dart';
@@ -73,10 +74,34 @@ class _DrawerMenuState extends State<DrawerMenu> {
               guest: guest,
             ),
           ),
-          const DrawerItem(
-            itemName: 'Reservations',
-            iconName: Icons.list_alt_rounded,
-            routeToPage: ReservationScreen(),
+          // const DrawerItem(
+          //   itemName: 'Reservations',
+          //   iconName: Icons.list_alt_rounded,
+          //   routeToPage: ReservationScreen(),
+          // ),
+          ListTile(
+            title: Text(
+              'Reservations',
+              style: TextStyle(
+                color: Colors.deepPurple.shade300,
+                fontWeight: FontWeight.w800,
+                fontSize: 16.0,
+              ),
+            ),
+            leading: const Icon(
+              Icons.list_alt_rounded,
+              color: Colors.deepPurple,
+              size: 30.0,
+            ),
+            onTap: () async {
+              await Provider.of<ReservationProvider>(context, listen: false)
+                  .fetchReservations(guest.uid!);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ReservationScreen()),
+              );
+            },
           ),
           DrawerItem(
             itemName: 'Help',

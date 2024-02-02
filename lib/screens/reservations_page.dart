@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hotel_reservation_system/models/reservation.dart';
+import 'package:flutter_hotel_reservation_system/services/providers/reservation_provider.dart';
+import 'package:provider/provider.dart';
 import '../widget_items/drawer_menu.dart';
 
 class ReservationScreen extends StatefulWidget {
@@ -9,14 +12,16 @@ class ReservationScreen extends StatefulWidget {
 }
 
 class _ReservationScreenState extends State<ReservationScreen> {
-  final List<Item> _data = generateItems();
+  late List<Reservation> reservations;
+  late List<Item> _data;
 
   // Track the selected reservation
   Item? selectedReservation;
-
   @override
   void initState() {
     super.initState();
+    reservations = Provider.of<ReservationProvider>(context, listen: false).reservations;
+    _data = generateItems(reservations);
     // Set the default selected reservation to the non-active reservation
     selectedReservation = _data.firstWhere(
       (item) => item.headerValue == 'Active Reservation',
@@ -25,6 +30,10 @@ class _ReservationScreenState extends State<ReservationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // List<Reservation> reservations = Provider.of<ReservationProvider>(context).reservations;
+    for (var res in reservations){
+      print('Room No: ${res.roomId}');
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
@@ -121,8 +130,8 @@ class _ReservationScreenState extends State<ReservationScreen> {
                               fontSize: 16, color: Colors.black),
                         ),
                       ),
-                      for (String hotel in selectedReservation!.hotels!)
-                        HotelTile(name: hotel),
+                      for (Reservation res in selectedReservation!.reservations!)
+                        HotelTile(roomNo: res.roomId, roomType: res.roomType,),
                     ],
                   ),
                 ),
@@ -135,9 +144,9 @@ class _ReservationScreenState extends State<ReservationScreen> {
 }
 
 class HotelTile extends StatelessWidget {
-  final String name;
+  final String roomNo, roomType;
 
-  const HotelTile({super.key, required this.name});
+  const HotelTile({super.key, required this.roomNo, required this.roomType});
 
   @override
   Widget build(BuildContext context) {
@@ -155,18 +164,17 @@ class HotelTile extends StatelessWidget {
         ),
       ),
       title: Text(
-        name,
+        'Room No: $roomNo',
         style: const TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 16,
           color: Colors.black,
         ),
       ),
-      subtitle: const Column(
+      subtitle: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('City: Your City', style: TextStyle(color: Colors.grey)),
-          Text('Room Type: Standard', style: TextStyle(color: Colors.grey)),
+          Text('Room Type: $roomType', style: const TextStyle(color: Colors.grey)),
         ],
       ),
       trailing: const Icon(Icons.arrow_forward, color: Colors.deepPurple),
@@ -178,25 +186,25 @@ class Item {
   Item({
     required this.expandedValue,
     required this.headerValue,
-    this.hotels,
+    this.reservations,
   });
 
   String expandedValue;
   String headerValue;
-  List<String>? hotels;
+  List<Reservation>? reservations;
 }
 
-List<Item> generateItems() {
+List<Item> generateItems(List<Reservation> reservations) {
   return [
     Item(
       headerValue: 'Active Reservation',
       expandedValue: 'Where you want to stay?',
-      hotels: generateRandomHotels(5),
+      reservations: reservations,
     ),
     Item(
       headerValue: 'Passive Reservation',
       expandedValue: 'List of hotels you have been to',
-      hotels: generateRandomHotels(3),
+      reservations: [],
     ),
   ];
 }

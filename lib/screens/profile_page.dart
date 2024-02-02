@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hotel_reservation_system/screens/login_page.dart';
 import 'package:flutter_hotel_reservation_system/screens/reservations_page.dart';
+import 'package:flutter_hotel_reservation_system/services/providers/reservation_provider.dart';
+import 'package:provider/provider.dart';
 import '../models/guest.dart';
 import '../widget_items/drawer_menu.dart';
 
@@ -136,7 +138,10 @@ class _ProfilePageState extends State<ProfilePage> {
                             horizontal: 20.0,
                           ),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
+                          await Provider.of<ReservationProvider>(context,
+                                  listen: false)
+                              .fetchReservations(widget.guest.uid!);
                           Navigator.push(
                             context,
                             MaterialPageRoute(

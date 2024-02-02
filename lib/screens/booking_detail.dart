@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hotel_reservation_system/models/guest.dart';
 import 'package:flutter_hotel_reservation_system/screens/reservations_page.dart';
+import 'package:flutter_hotel_reservation_system/services/providers/reservation_provider.dart';
+import 'package:flutter_hotel_reservation_system/services/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class BookingDetailsScreen extends StatelessWidget {
   final String roomType;
@@ -12,9 +16,13 @@ class BookingDetailsScreen extends StatelessWidget {
     required this.roomImages,
     required this.amountPaid,
   });
+  static String guestId = '';
+
 
   @override
   Widget build(BuildContext context) {
+    Guest guest = Provider.of<UserProvider>(context).guest;
+    guestId = guest.uid!;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -105,7 +113,10 @@ class BookingDetailsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 15.0,),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      await Provider.of<ReservationProvider>(context,
+                          listen: false)
+                          .fetchReservations(guestId);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
