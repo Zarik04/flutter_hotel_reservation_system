@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hotel_reservation_system/models/room.dart';
 import 'package:flutter_hotel_reservation_system/screens/booking_detail.dart';
 
 class PaymentScreen extends StatefulWidget {
+  final Room room;
   final String roomType;
   final List<String> roomImages;
 
-  PaymentScreen({required this.roomType, required this.roomImages});
+  const PaymentScreen(
+      {super.key, required this.room, required this.roomType, required this.roomImages});
 
   @override
   _PaymentScreenState createState() => _PaymentScreenState();
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
-  TextEditingController _amountController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Payment', style: TextStyle(color: Colors.white)),
+        title: const Text('Payment', style: TextStyle(color: Colors.white)),
         backgroundColor: Colors.deepPurple,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -36,13 +39,13 @@ class _PaymentScreenState extends State<PaymentScreen> {
               children: [
                 Text(
                   'Room Type: ${widget.roomType}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 16.0),
-                Container(
+                const SizedBox(height: 16.0),
+                SizedBox(
                   height: 100.0,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
@@ -50,7 +53,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     itemBuilder: (context, index) {
                       return Container(
                         width: 150.0,
-                        margin: EdgeInsets.only(right: 8.0),
+                        margin: const EdgeInsets.only(right: 8.0),
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage(widget.roomImages[index]),
@@ -62,15 +65,15 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     },
                   ),
                 ),
-                SizedBox(height: 16.0),
-                Text(
+                const SizedBox(height: 16.0),
+                const Text(
                   'Payment Amount',
                   style: TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 8.0),
+                const SizedBox(height: 8.0),
                 TextField(
                   controller: _amountController,
                   keyboardType: TextInputType.number,
@@ -81,18 +84,18 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: () {
                     _handlePayment(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.deepPurple,
+                    backgroundColor: Colors.deepPurple,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Proceed to Payment',
                     style: TextStyle(color: Colors.white),
                   ),
@@ -112,21 +115,21 @@ class _PaymentScreenState extends State<PaymentScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text('Payment Result'),
-          content: Text(amount > 0
+          title: const Text('Payment Result'),
+          content: Text(amount == widget.room.price
               ? 'Payment Successful\nAmount: \$${amount.toStringAsFixed(2)}'
               : 'Invalid Amount. Please enter a valid amount.'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                if (amount > 0) {
+                if (amount == widget.room.price) {
                   _showBookingDetails(context, amount);
                 } else {
                   Navigator.of(context).pop();
                 }
               },
-              child: Text('Close'),
+              child: const Text('Close'),
             ),
           ],
         );

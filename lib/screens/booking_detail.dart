@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hotel_reservation_system/screens/reservations_page.dart';
 
 class BookingDetailsScreen extends StatelessWidget {
   final String roomType;
   final List<String> roomImages;
   final double amountPaid;
 
-  BookingDetailsScreen({
+  const BookingDetailsScreen({
+    super.key,
     required this.roomType,
     required this.roomImages,
     required this.amountPaid,
@@ -15,7 +17,7 @@ class BookingDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Booking Details',
           style: TextStyle(
             color: Colors.white,
@@ -23,10 +25,10 @@ class BookingDetailsScreen extends StatelessWidget {
           ),
         ),
         backgroundColor: Colors.deepPurple,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
         ),
         child: Padding(
@@ -43,45 +45,45 @@ class BookingDetailsScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
+                  const Text(
                     'Room Type:',
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 8.0),
+                  const SizedBox(height: 8.0),
                   Text(
                     roomType,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16.0,
                     ),
                   ),
-                  SizedBox(height: 16.0),
-                  Text(
+                  const SizedBox(height: 16.0),
+                  const Text(
                     'Amount Paid:',
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 8.0),
+                  const SizedBox(height: 8.0),
                   Text(
                     '\$${amountPaid.toStringAsFixed(2)}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16.0,
                     ),
                   ),
-                  SizedBox(height: 16.0),
-                  Text(
+                  const SizedBox(height: 16.0),
+                  const Text(
                     'Room Images:',
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 8.0),
-                  Container(
+                  const SizedBox(height: 8.0),
+                  SizedBox(
                     height: 100.0,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
@@ -89,7 +91,7 @@ class BookingDetailsScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return Container(
                           width: 150.0,
-                          margin: EdgeInsets.only(right: 8.0),
+                          margin: const EdgeInsets.only(right: 8.0),
                           decoration: BoxDecoration(
                             image: DecorationImage(
                               image: AssetImage(roomImages[index]),
@@ -100,6 +102,22 @@ class BookingDetailsScreen extends StatelessWidget {
                         );
                       },
                     ),
+                  ),
+                  const SizedBox(height: 15.0,),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ReservationScreen()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.deepPurple,
+                      fixedSize: const Size(100,
+                          35), // Set the width and height as per your requirement
+                    ),
+                    child: const Text('Close',
+                        style: TextStyle(color: Colors.white)),
                   ),
                 ],
               ),

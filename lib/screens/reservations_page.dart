@@ -19,7 +19,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
     super.initState();
     // Set the default selected reservation to the non-active reservation
     selectedReservation = _data.firstWhere(
-      (item) => item.headerValue == 'Passive Reservation',
+      (item) => item.headerValue == 'Active Reservation',
     );
   }
 

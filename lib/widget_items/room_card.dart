@@ -123,7 +123,7 @@ class RoomTypeCard extends StatelessWidget {
       context,
       MaterialPageRoute(
         builder: (context) =>
-            PaymentScreen(roomType: room.roomType, roomImages: images),
+            PaymentScreen(room:room, roomType: room.roomType, roomImages: images),
       ),
     );
   }
