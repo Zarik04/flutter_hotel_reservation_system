@@ -1,10 +1,12 @@
 class Hotel {
+  String? hotelId;
   final String name;
   final String imageUrl;
   final double rating;
   final String location;
 
   Hotel({
+    this.hotelId,
     required this.name,
     required this.imageUrl,
     required this.rating,
@@ -20,8 +22,9 @@ class Hotel {
     };
   }
 
-  factory Hotel.fromMap(Map<String, dynamic> map) {
+  factory Hotel.fromMap(String docId, Map<String, dynamic> map) {
     return Hotel(
+      hotelId: docId,
       name: map['name'],
       imageUrl: map['imageUrl'],
       rating: map['rating'],

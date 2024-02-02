@@ -7,7 +7,7 @@ class RoomDatabase {
     final ref = FirebaseFirestore.instance.collection('rooms').doc(hotelId);
 
     return ref.set({
-      room.roomId: room.toMap(),
+      room.roomNo: room.toMap(),
     }, SetOptions(merge: true));
   }
 

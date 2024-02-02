@@ -17,7 +17,8 @@ class HotelDatabase {
 
     return snapshot.docs.map((doc) {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-      return Hotel.fromMap(data);
+      return Hotel.fromMap(doc.id, data);
     }).toList();
   }
+
 }
